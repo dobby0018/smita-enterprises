@@ -3,12 +3,12 @@
 
 export default function Contact() {
   // Company information
-  const companyInfo = {
-    address: "418, GIDC Estate, Naroda, Ahmedabad - 382330, Gujarat, India",
-    phone: "+91 79 2281 2345",
-    email: "info@smitaenterprises.com",
+const companyInfo = {
+    address: "Smitha Enterprises Unit 2, Post, Industrial Area, Harihar, Karnataka, India",
+    phone: "08192-242341",
+    email: "msarun71@yahoo.com",
     hours: "Monday - Saturday: 9:00 AM - 6:00 PM",
-    emergencySupport: "+91 98765 43210"
+    emergencySupport: "9845265394"
   };
 
   const departments = [
@@ -140,7 +140,7 @@ export default function Contact() {
                 {/* Google Maps Container */}
                 <div className="h-80 md:h-96 w-full">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14688.135206125422!2d72.65737436977538!3d23.022999999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e85cc8aca93e1%3A0x93c8483c18b8e1f1!2sNaroda%20GIDC%2C%20Ahmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1dXXXXXX!2d75.8125434!3d14.5248848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bba293fea514605%3A0xe1721aeb636a704f!2sSmitha%20Enterprises%20Unit%202%2C%20Plot%20No.%20CR5-10%2C%20Industrial%20Estate%2C%20Yantrapur%20Post%2C%20Harihar%2C%20Karnataka%20577601!5e0!3m2!1sen!2sin!4vYYYYYYYYYYYYY!5m2!1sen!2sin"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -161,7 +161,7 @@ export default function Contact() {
                       {companyInfo.address}
                     </span>
                     <a 
-                      href="https://maps.google.com/?q=Naroda+GIDC,Ahmedabad,Gujarat"
+                      href="https://www.google.com/maps/dir//Smitha+Enterprises+Unit+2,+Post,+Industrial+Area,+Harihar,+Karnataka,+India/@14.5249216,75.7296672,12z?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 font-medium flex items-center"

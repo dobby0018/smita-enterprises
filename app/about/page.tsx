@@ -1,28 +1,342 @@
+import Link from 'next/link';
+
 export default function About() {
+  const milestones = [
+    {
+      year: "1996",
+      title: "The Foundation",
+      description: "Smitha Enterprises was established in Harihar, Karnataka, with a vision to revolutionize precision casting in the automotive industry.",
+      icon: "🏭"
+    },
+    {
+      year: "2001",
+      title: "First Major Breakthrough",
+      description: "Secured our first major OEM partnership, establishing credibility in the automotive components market.",
+      icon: "🚀"
+    },
+    {
+      year: "2008",
+      title: "Capacity Expansion",
+      description: "Expanded our manufacturing facility to 30,000 sq. ft. and installed advanced shell moulding technology.",
+      icon: "📈"
+    },
+    {
+      year: "2015",
+      title: "Quality Certification",
+      description: "Achieved ISO 9001:2015 certification, marking our commitment to international quality standards.",
+      icon: "⭐"
+    },
+    {
+      year: "2020",
+      title: "Production Milestone",
+      description: "Reached monthly production capacity of 10,000+ air-cooled blocks, serving leading automotive brands.",
+      icon: "🎯"
+    },
+    {
+      year: "2024",
+      title: "Industry Leadership",
+      description: "Recognized as a trusted manufacturer for OEMs and Tier-1 suppliers with 250+ skilled professionals.",
+      icon: "👑"
+    }
+  ];
+
+  const values = [
+    {
+      icon: "🎯",
+      title: "Precision Engineering",
+      description: "Every component is engineered with exacting standards and attention to detail"
+    },
+    {
+      icon: "🛡️",
+      title: "Quality Assurance",
+      description: "Rigorous testing and quality control at every stage of production"
+    },
+    {
+      icon: "🤝",
+      title: "Customer Partnership",
+      description: "Building long-term relationships based on trust and reliability"
+    },
+    {
+      icon: "💡",
+      title: "Innovation",
+      description: "Continuously improving processes and adopting advanced technologies"
+    }
+  ];
+
   return (
-    <div className="py-16">
-      <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12">About Us</h1>
-        
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Our Story</h2>
-            <p className="text-gray-700 mb-6">
-              Founded with a vision to revolutionize auto parts manufacturing, 
-              Smita Enterprises combines traditional craftsmanship with modern technology.
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-blue-800 text-white py-20 overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/20 border border-blue-400/30 mb-6">
+              <span className="text-blue-200 text-sm font-medium">Our Legacy Since 1996</span>
+            </div>
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                Crafting Excellence
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">
+                Since 1996
+              </span>
+            </h1>
+            <p className="text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
+              From a humble beginning to becoming a trusted name in precision casting, 
+              discover the journey that shaped our commitment to quality and innovation.
             </p>
-            <p className="text-gray-700 mb-6">
-              We believe in building lasting relationships with our customers 
-              through quality products and exceptional service.
-            </p>
-          </div>
-          
-          <div className="bg-gray-200 h-80 rounded-lg flex items-center justify-center">
-            {/* Company Image */}
-            <span className="text-gray-500">Company Image</span>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Company Story */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900 mb-6">The Smitha Enterprises Story</h2>
+                <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+                  <p>
+                    Founded in 1996 in the industrial heartland of Harihar, Karnataka, 
+                    Smitha Enterprises began with a simple yet powerful vision: to deliver 
+                    precision-cast components that set new benchmarks in quality and reliability.
+                  </p>
+                  <p>
+                    What started as a modest operation has today evolved into a 30,000 sq. ft. 
+                    state-of-the-art manufacturing facility, trusted by leading OEMs and 
+                    Tier-1 manufacturers across the automotive industry.
+                  </p>
+                  <p>
+                    Our journey of over 25 years is a testament to our unwavering commitment 
+                    to excellence, innovation, and customer satisfaction.
+                  </p>
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-blue-50 to-gray-100 rounded-2xl p-8 border border-blue-200">
+                <div className="text-center">
+                  <div className="text-6xl mb-4">🏭</div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Harihar, Karnataka</h3>
+                  <p className="text-gray-600 mb-4">
+                    Strategically located 280 km from Bengaluru, in one of Karnatakas 
+                    prominent industrial corridors
+                  </p>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="bg-white rounded-lg p-3">
+                      <div className="font-bold text-blue-600">30,000+</div>
+                      <div className="text-gray-600">Sq. Ft. Facility</div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3">
+                      <div className="font-bold text-blue-600">250+</div>
+                      <div className="text-gray-600">Team Members</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Timeline */}
+            <div className="mb-16">
+              <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">Our Journey Through Time</h2>
+              <div className="relative">
+                {/* Timeline line */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-blue-200 h-full"></div>
+                
+                {/* Timeline items */}
+                <div className="space-y-12">
+                  {milestones.map((milestone, index) => (
+                    <div key={index} className={`relative flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                      {/* Content */}
+                      <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
+                        <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition duration-300">
+                          <div className="flex items-center mb-3">
+                            <span className="text-2xl mr-3">{milestone.icon}</span>
+                            <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
+                              {milestone.year}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
+                          <p className="text-gray-600">{milestone.description}</p>
+                        </div>
+                      </div>
+                      
+                      {/* Year marker */}
+                      <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
+                      
+                      {/* Empty space for the other side */}
+                      <div className="w-1/2"></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Capabilities Section */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Unmatched Capabilities</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                Leveraging decades of expertise and state-of-the-art infrastructure to deliver excellence
+              </p>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-12 mb-12">
+              <div className="space-y-8">
+                <div className="bg-white rounded-2xl shadow-lg p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Production Excellence</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">✓</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Mass Production Capacity</h4>
+                        <p className="text-gray-600 text-sm">10,000+ air-cooled blocks monthly with consistent quality</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">✓</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">In-house Finishing</h4>
+                        <p className="text-gray-600 text-sm">Complete phosphating and painting unit for superior surface protection</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                        <span className="text-green-600 font-bold">✓</span>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-gray-900">Wide Weight Range</h4>
+                        <p className="text-gray-600 text-sm">Components from 760 grams to 250 kilograms</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Promise</h3>
+                  <p className="text-gray-700 mb-4">
+                    Our commitment to quality, precision, and reliability has earned us the confidence 
+                    of leading OEMs, Tier-1, and Tier-2 manufacturers.
+                  </p>
+                  <p className="text-gray-700">
+                    We take pride in casting reliability that drives long-term partnerships and success 
+                    for our clients across the automotive sector.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl shadow-lg p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6">Metallurgical Mastery</h3>
+                <div className="space-y-6">
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                      <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-2 text-blue-600">C</span>
+                      Cast Iron Expertise
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['FG 200', 'FG 250', 'FG 300'].map((grade) => (
+                        <span key={grade} className="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm border border-blue-200">
+                          {grade}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                      <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-2 text-green-600">S</span>
+                      SG Iron Specialization
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {['400/18', '500/7', '600/3', '700/2'].map((grade) => (
+                        <span key={grade} className="bg-green-50 text-green-700 px-3 py-1 rounded-full text-sm border border-green-200">
+                          {grade}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                      <span className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center mr-2 text-purple-600">A</span>
+                      Advanced Alloys
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      <span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm border border-purple-200">
+                        High Chrome (up to 35%)
+                      </span>
+                      <span className="bg-purple-50 text-purple-700 px-3 py-1 rounded-full text-sm border border-purple-200">
+                        Ni-Hard Grades
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Core Values</h2>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                The principles that guide every decision and action at Smitha Enterprises
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {values.map((value, index) => (
+                <div key={index} className="text-center group">
+                  <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition duration-300">
+                    <span className="text-3xl text-white">{value.icon}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
+                  <p className="text-gray-600">{value.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Ready to Be Part of Our Story?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join the growing list of industry leaders who trust Smitha Enterprises for their precision casting needs
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link 
+              href="/contact" 
+              className="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition duration-300"
+            >
+              Start a Partnership
+            </Link>
+            <Link 
+              href="/infrastructure" 
+              className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-blue-600 transition duration-300"
+            >
+              Explore Our Facility
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

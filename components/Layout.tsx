@@ -1,90 +1,12 @@
-// // components/Layout.tsx
-// 'use client';
-// import { useState } from 'react';
-// import Link from 'next/link';
-
-// export default function Layout({ children }: { children: React.ReactNode }) {
-//   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-//   const navItems = [
-//     { name: 'Home', path: '/' },
-//     { name: 'About Us', path: '/about' },
-//     { name: 'Infrastructure', path: '/infrastructure' },
-//     { name: 'Products', path: '/products' },
-//     { name: 'Certifications', path: '/certifications' },
-//     { name: 'Careers', path: '/careers' },
-//     { name: 'Contact Us', path: '/contact' },
-//   ];
-
-//   return (
-//     <div className="min-h-screen flex flex-col">
-//       {/* App Bar */}
-//       <nav className="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
-//         <div className="container mx-auto px-4">
-//           <div className="flex justify-between items-center h-16">
-//             {/* Logo */}
-//             <div className="flex-shrink-0">
-//               <Link href="/" className="text-xl font-bold">Smita Enterprises</Link>
-//             </div>
-            
-//             {/* Desktop Navigation */}
-//             <div className="hidden md:flex space-x-8">
-//               {navItems.map((item) => (
-//                 <Link key={item.name} href={item.path} 
-//                    className="hover:text-yellow-400 transition duration-300">
-//                   {item.name}
-//                 </Link>
-//               ))}
-//             </div>
-
-//             {/* Mobile Menu Button */}
-//             <button 
-//               className="md:hidden p-2"
-//               onClick={() => setIsMenuOpen(!isMenuOpen)}
-//             >
-//               <div className="w-6 h-px bg-white mb-1"></div>
-//               <div className="w-6 h-px bg-white mb-1"></div>
-//               <div className="w-6 h-px bg-white"></div>
-//             </button>
-//           </div>
-
-//           {/* Mobile Menu */}
-//           {isMenuOpen && (
-//             <div className="md:hidden bg-gray-800 py-4">
-//               {navItems.map((item) => (
-//                 <Link key={item.name} href={item.path} 
-//                    className="block py-2 px-4 hover:bg-gray-700 transition duration-300"
-//                    onClick={() => setIsMenuOpen(false)}>
-//                   {item.name}
-//                 </Link>
-//               ))}
-//             </div>
-//           )}
-//         </div>
-//       </nav>
-
-//       {/* Main Content */}
-//       <main className="flex-grow">
-//         {children}
-//       </main>
-
-//       {/* Footer */}
-//       <footer className="bg-gray-800 text-white py-8">
-//         <div className="container mx-auto px-4 text-center">
-//           <p>&copy; 2025 Smita Enterprises. All rights reserved.</p>
-//         </div>
-//       </footer>
-//     </div>
-//   );
-// }
-/////////////////////////////
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
@@ -97,15 +19,36 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsProductsOpen(false);
+  }, [pathname]);
+
+  // Updated navigation order - Products before Infrastructure
   const navigation = [
     { name: 'Home', href: '/', icon: '🏠' },
     { name: 'About Us', href: '/about', icon: '👥' },
-    { name: 'Infrastructure', href: '/infrastructure', icon: '🏭' },
-    { name: 'Products', href: '/products', icon: '🔧' },
     { name: 'Certifications', href: '/certifications', icon: '📜' },
     { name: 'Careers', href: '/careers', icon: '💼' },
     { name: 'Contact Us', href: '/contact', icon: '📞' },
   ];
+
+  const productCategories = [
+    { name: 'Cylinder Liners', href: '/products/cylinder-liners' },
+    { name: 'Cylinder Blocks', href: '/products/cylinder-blocks' },
+    { name: 'Pistons', href: '/products/pistons' },
+    { name: 'Crankshaft', href: '/products/crankshaft' },
+    { name: 'Piston Rings', href: '/products/piston-rings' },
+    { name: 'Engine Bearings', href: '/products/engine-bearings' },
+    { name: 'Oil Seal Rings', href: '/products/oil-seal-rings' },
+    { name: 'King Pin Kits', href: '/products/king-pin-kits' },
+    { name: 'Engine Valves', href: '/products/engine-valves' },
+    { name: 'Connecting Rods', href: '/products/connecting-rods' },
+    { name: 'Piston Pin', href: '/products/piston-pin' },
+  ];
+
+  const isProductPage = pathname.startsWith('/products');
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -117,39 +60,137 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       }`}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
-            {/* Logo Section */}
+            {/* Logo Section with Image */}
             <Link 
               href="/" 
-              className="flex items-center space-x-3 group"
+              className="flex items-center space-x-3 group no-underline"
             >
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
-                isScrolled 
-                  ? 'bg-blue-600 text-white' 
-                  : 'bg-white/20 text-white'
+              {/* Logo Image Container */}
+              <div className={`relative transition-all duration-300 ${
+                isScrolled ? 'w-12 h-12' : 'w-14 h-14'
               }`}>
-                <span className="text-lg font-bold">SE</span>
+                <Image
+                  src="/logo.png" // Replace with your logo path
+                  alt="Smitha Enterprises"
+                  fill
+                  className="object-contain"
+                  priority
+                  sizes="(max-width: 768px) 56px, 48px"
+                />
               </div>
-              <div className="flex flex-col">
+              
+              {/* Company Name - Hidden on mobile, shown on desktop */}
+              <div className="hidden sm:flex flex-col">
                 <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
                   isScrolled ? 'text-gray-900' : 'text-white'
-                } font-['Inter']`}>
-                  Smita Enterprises
-                </span>
-                <span className={`text-xs transition-colors duration-300 ${
-                  isScrolled ? 'text-gray-600' : 'text-blue-200'
-                } font-light tracking-wide`}>
-                  Auto Parts Manufacturer
+                }`}>
+                  Smitha Enterprises
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-1">
-              {navigation.map((item) => (
+              {navigation.slice(0, 2).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-['Inter'] font-medium ${
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
+                    pathname === item.href
+                      ? isScrolled 
+                        ? 'text-blue-600 bg-blue-50' 
+                        : 'text-white bg-white/20'
+                      : isScrolled
+                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+                        : 'text-blue-100 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="flex items-center space-x-2">
+                    <span className="text-sm">{item.icon}</span>
+                    <span className="text-sm tracking-wide">{item.name}</span>
+                  </span>
+                  
+                  {/* Active indicator */}
+                  {pathname === item.href && (
+                    <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                      isScrolled ? 'bg-blue-600' : 'bg-yellow-400'
+                    }`}></div>
+                  )}
+                </Link>
+              ))}
+              
+              {/* Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsProductsOpen(true)}
+                onMouseLeave={() => setIsProductsOpen(false)}
+              >
+                <button
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium flex items-center space-x-2 ${
+                    isProductPage
+                      ? isScrolled 
+                        ? 'text-blue-600 bg-blue-50' 
+                        : 'text-white bg-white/20'
+                      : isScrolled
+                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+                        : 'text-blue-100 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="text-sm">🔧</span>
+                  <span className="text-sm tracking-wide">Products</span>
+                  <span className="text-xs">▼</span>
+                </button>
+
+                {/* Dropdown Menu */}
+                {isProductsOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                    {productCategories.map((product) => (
+                      <Link
+                        key={product.name}
+                        href={product.href}
+                        className={`block px-4 py-3 transition-all duration-200 hover:bg-blue-50 ${
+                          pathname === product.href ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                        }`}
+                      >
+                        {product.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Infrastructure - NOW AFTER PRODUCTS */}
+              <Link
+                href="/infrastructure"
+                className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
+                  pathname === '/infrastructure'
+                    ? isScrolled 
+                      ? 'text-blue-600 bg-blue-50' 
+                      : 'text-white bg-white/20'
+                    : isScrolled
+                      ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <span className="flex items-center space-x-2">
+                  <span className="text-sm">🏭</span>
+                  <span className="text-sm tracking-wide">Infrastructure</span>
+                </span>
+                
+                {/* Active indicator */}
+                {pathname === '/infrastructure' && (
+                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
+                    isScrolled ? 'bg-blue-600' : 'bg-yellow-400'
+                  }`}></div>
+                )}
+              </Link>
+
+              {/* Rest of navigation items */}
+              {navigation.slice(2).map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
                     pathname === item.href
                       ? isScrolled 
                         ? 'text-blue-600 bg-blue-50' 
@@ -174,37 +215,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               ))}
             </div>
 
-            {/* Mobile Menu Button - Enhanced */}
+            {/* Mobile Menu Button */}
             <button
               className={`lg:hidden flex flex-col items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg ${
                 isScrolled 
                   ? 'hover:bg-gray-100' 
                   : 'hover:bg-white/10'
-              } ${isMenuOpen ? 'space-y-0' : 'space-y-1.5'}`}
+              }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? 'rotate-45 translate-y-0.5' : ''}`}></span>
+              } ${isMenuOpen ? 'rotate-45 translate-y-1' : 'mb-1.5'}`}></span>
               <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></span>
+              } ${isMenuOpen ? 'opacity-0' : 'mb-1.5'}`}></span>
               <span className={`block w-6 h-0.5 transition-all duration-300 ${
                 isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? '-rotate-45 -translate-y-0.5' : ''}`}></span>
+              } ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
             </button>
           </div>
 
-          {/* Enhanced Mobile Menu */}
+          {/* Mobile Menu */}
           <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-96 opacity-100 pb-4' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-screen opacity-100 pb-4' : 'max-h-0 opacity-0'
           }`}>
             <div className={`py-2 rounded-2xl ${
               isScrolled 
                 ? 'bg-white/95 backdrop-blur-md shadow-xl border border-gray-200' 
                 : 'bg-white/10 backdrop-blur-md border border-white/20'
             }`}>
-              {navigation.map((item, index) => (
+              {/* Home and About Us */}
+              {navigation.slice(0, 2).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -216,12 +258,100 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                       : isScrolled
                         ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
                         : 'text-white hover:bg-white/20'
-                  } ${isMenuOpen ? 'animate-fade-in-up' : ''}`}
-                  style={{ animationDelay: `${index * 50}ms` }}
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="text-lg">{item.icon}</span>
-                  <span className="font-['Inter'] font-medium tracking-wide">{item.name}</span>
+                  <span className="font-medium tracking-wide">{item.name}</span>
+                  {pathname === item.href && (
+                    <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
+                  )}
+                </Link>
+              ))}
+              
+              {/* Mobile Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
+              <div className="px-2">
+                <button
+                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  className={`flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
+                    isScrolled
+                      ? 'text-gray-700 hover:bg-gray-100'
+                      : 'text-white hover:bg-white/20'
+                  }`}
+                >
+                  <span className="flex items-center space-x-3">
+                    <span className="text-lg">🔧</span>
+                    <span className="font-medium tracking-wide">Products</span>
+                  </span>
+                  <span className={`transform transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}>
+                    ▼
+                  </span>
+                </button>
+                
+                {/* Mobile Products Submenu */}
+                {isProductsOpen && (
+                  <div className="ml-6 mt-2 space-y-1">
+                    {productCategories.map((product) => (
+                      <Link
+                        key={product.name}
+                        href={product.href}
+                        className={`block px-4 py-3 rounded-xl transition-all duration-300 ${
+                          pathname === product.href
+                            ? isScrolled
+                              ? 'bg-blue-600 text-white'
+                              : 'bg-white text-blue-900'
+                            : isScrolled
+                              ? 'text-gray-700 hover:bg-gray-100'
+                              : 'text-white hover:bg-white/20'
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {product.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Infrastructure - NOW AFTER PRODUCTS */}
+              <Link
+                href="/infrastructure"
+                className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
+                  pathname === '/infrastructure'
+                    ? isScrolled
+                      ? 'bg-blue-600 text-white shadow-lg'
+                      : 'bg-white text-blue-900 shadow-lg'
+                    : isScrolled
+                      ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                      : 'text-white hover:bg-white/20'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <span className="text-lg">🏭</span>
+                <span className="font-medium tracking-wide">Infrastructure</span>
+                {pathname === '/infrastructure' && (
+                  <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
+                )}
+              </Link>
+
+              {/* Rest of navigation items */}
+              {navigation.slice(2).map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
+                    pathname === item.href
+                      ? isScrolled
+                        ? 'bg-blue-600 text-white shadow-lg'
+                        : 'bg-white text-blue-900 shadow-lg'
+                      : isScrolled
+                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+                        : 'text-white hover:bg-white/20'
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="text-lg">{item.icon}</span>
+                  <span className="font-medium tracking-wide">{item.name}</span>
                   {pathname === item.href && (
                     <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
                   )}
@@ -244,12 +374,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {/* Company Info */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="font-bold text-white">SE</span>
+                <div className="relative w-12 h-12">
+                  <Image
+                    src="/logo.png" // Same logo as header
+                    alt="Smita Enterprises"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-['Inter']">Smita Enterprises</h3>
-                  <p className="text-blue-200 text-sm">Auto Parts Manufacturer</p>
+                  <h3 className="text-xl font-bold">Smita Enterprises</h3>
                 </div>
               </div>
               <p className="text-gray-300 mb-4 max-w-md">
@@ -271,35 +405,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-bold font-['Inter'] mb-4 text-lg">Quick Links</h4>
+              <h4 className="font-bold mb-4 text-lg">Quick Links</h4>
               <div className="space-y-2">
-                {navigation.slice(1, 5).map((item) => (
-                  <Link 
-                    key={item.name} 
-                    href={item.href}
-                    className="block text-gray-300 hover:text-white transition duration-300 py-1"
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <Link href="/products" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
+                  Products
+                </Link>
+                <Link href="/infrastructure" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
+                  Infrastructure
+                </Link>
+                <Link href="/certifications" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
+                  Certifications
+                </Link>
+                <Link href="/about" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
+                  About Us
+                </Link>
               </div>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-bold font-['Inter'] mb-4 text-lg">Contact</h4>
+              <h4 className="font-bold mb-4 text-lg">Contact</h4>
               <div className="space-y-2 text-gray-300">
                 <p className="flex items-center space-x-2">
                   <span>📧</span>
-                  <span>info@smitaenterprises.com</span>
+                  <span>msarun71@yahoo.com</span>
                 </p>
                 <p className="flex items-center space-x-2">
                   <span>📞</span>
-                  <span>+91 79 2281 2345</span>
+                  <span>+91 9845265394</span>
                 </p>
                 <p className="flex items-center space-x-2">
                   <span>📍</span>
-                  <span className="text-sm">Naroda GIDC, Ahmedabad</span>
+                  <span className="text-sm">Harihar, Karnataka</span>
                 </p>
               </div>
             </div>
