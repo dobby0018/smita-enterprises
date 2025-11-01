@@ -7,17 +7,7 @@ import Image from 'next/image';
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-
-  // Handle scroll effect for navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -52,12 +42,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Enhanced App Bar */}
-      <nav className={`sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' 
-          : 'bg-gradient-to-r from-blue-900 to-gray-900'
-      }`}>
+      {/* Enhanced App Bar - Always dark background */}
+      <nav className="sticky top-0 z-50 bg-gradient-to-r from-blue-900 to-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
             {/* Logo Section with Image */}
@@ -66,9 +52,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               className="flex items-center space-x-3 group no-underline"
             >
               {/* Logo Image Container */}
-              <div className={`relative transition-all duration-300 ${
-                isScrolled ? 'w-12 h-12' : 'w-14 h-14'
-              }`}>
+              <div className="relative w-14 h-14">
                 <Image
                   src="/logo.png" // Replace with your logo path
                   alt="Smitha Enterprises"
@@ -81,9 +65,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               
               {/* Company Name - Hidden on mobile, shown on desktop */}
               <div className="hidden sm:flex flex-col">
-                <span className={`text-xl font-bold tracking-tight transition-colors duration-300 ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
-                }`}>
+                <span className="text-xl font-bold tracking-tight text-white">
                   Smitha Enterprises
                 </span>
               </div>
@@ -97,12 +79,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
                     pathname === item.href
-                      ? isScrolled 
-                        ? 'text-blue-600 bg-blue-50' 
-                        : 'text-white bg-white/20'
-                      : isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                        : 'text-blue-100 hover:text-white hover:bg-white/10'
+                      ? 'text-white bg-white/20' 
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span className="flex items-center space-x-2">
@@ -112,9 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   
                   {/* Active indicator */}
                   {pathname === item.href && (
-                    <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
-                      isScrolled ? 'bg-blue-600' : 'bg-yellow-400'
-                    }`}></div>
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
                   )}
                 </Link>
               ))}
@@ -128,12 +104,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <button
                   className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium flex items-center space-x-2 ${
                     isProductPage
-                      ? isScrolled 
-                        ? 'text-blue-600 bg-blue-50' 
-                        : 'text-white bg-white/20'
-                      : isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                        : 'text-blue-100 hover:text-white hover:bg-white/10'
+                      ? 'text-white bg-white/20' 
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span className="text-sm">🔧</span>
@@ -143,7 +115,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
                 {/* Dropdown Menu */}
                 {isProductsOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50">
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 max-h-80 overflow-y-auto">
                     {productCategories.map((product) => (
                       <Link
                         key={product.name}
@@ -164,12 +136,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 href="/infrastructure"
                 className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
                   pathname === '/infrastructure'
-                    ? isScrolled 
-                      ? 'text-blue-600 bg-blue-50' 
-                      : 'text-white bg-white/20'
-                    : isScrolled
-                      ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                      : 'text-blue-100 hover:text-white hover:bg-white/10'
+                    ? 'text-white bg-white/20' 
+                    : 'text-blue-100 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <span className="flex items-center space-x-2">
@@ -179,9 +147,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 
                 {/* Active indicator */}
                 {pathname === '/infrastructure' && (
-                  <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
-                    isScrolled ? 'bg-blue-600' : 'bg-yellow-400'
-                  }`}></div>
+                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
                 )}
               </Link>
 
@@ -192,12 +158,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   href={item.href}
                   className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
                     pathname === item.href
-                      ? isScrolled 
-                        ? 'text-blue-600 bg-blue-50' 
-                        : 'text-white bg-white/20'
-                      : isScrolled
-                        ? 'text-gray-700 hover:text-blue-600 hover:bg-gray-100'
-                        : 'text-blue-100 hover:text-white hover:bg-white/10'
+                      ? 'text-white bg-white/20' 
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span className="flex items-center space-x-2">
@@ -207,9 +169,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   
                   {/* Active indicator */}
                   {pathname === item.href && (
-                    <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full ${
-                      isScrolled ? 'bg-blue-600' : 'bg-yellow-400'
-                    }`}></div>
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
                   )}
                 </Link>
               ))}
@@ -217,146 +177,121 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             {/* Mobile Menu Button */}
             <button
-              className={`lg:hidden flex flex-col items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg ${
-                isScrolled 
-                  ? 'hover:bg-gray-100' 
-                  : 'hover:bg-white/10'
-              }`}
+              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg hover:bg-white/10"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <span className={`block w-6 h-0.5 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? 'rotate-45 translate-y-1' : 'mb-1.5'}`}></span>
-              <span className={`block w-6 h-0.5 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? 'opacity-0' : 'mb-1.5'}`}></span>
-              <span className={`block w-6 h-0.5 transition-all duration-300 ${
-                isScrolled ? 'bg-gray-700' : 'bg-white'
-              } ${isMenuOpen ? '-rotate-45 -translate-y-1' : ''}`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? 'rotate-45 translate-y-1' : 'mb-1.5'
+              }`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? 'opacity-0' : 'mb-1.5'
+              }`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
+                isMenuOpen ? '-rotate-45 -translate-y-1' : ''
+              }`}></span>
             </button>
           </div>
 
-          {/* Mobile Menu */}
+          {/* Mobile Menu - Fixed scrolling issue */}
           <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-screen opacity-100 pb-4' : 'max-h-0 opacity-0'
+            isMenuOpen ? 'max-h-[80vh] opacity-100 pb-4' : 'max-h-0 opacity-0'
           }`}>
-            <div className={`py-2 rounded-2xl ${
-              isScrolled 
-                ? 'bg-white/95 backdrop-blur-md shadow-xl border border-gray-200' 
-                : 'bg-white/10 backdrop-blur-md border border-white/20'
-            }`}>
-              {/* Home and About Us */}
-              {navigation.slice(0, 2).map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                    pathname === item.href
-                      ? isScrolled
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-white text-blue-900 shadow-lg'
-                      : isScrolled
-                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden">
+              {/* Scrollable container for mobile menu */}
+              <div className="max-h-[70vh] overflow-y-auto">
+                {/* Home and About Us */}
+                {navigation.slice(0, 2).map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
+                      pathname === item.href
+                        ? 'bg-white text-blue-900 shadow-lg'
                         : 'text-white hover:bg-white/20'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <span className="text-lg">{item.icon}</span>
-                  <span className="font-medium tracking-wide">{item.name}</span>
-                  {pathname === item.href && (
-                    <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
-                  )}
-                </Link>
-              ))}
-              
-              {/* Mobile Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
-              <div className="px-2">
-                <button
-                  onClick={() => setIsProductsOpen(!isProductsOpen)}
-                  className={`flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                    isScrolled
-                      ? 'text-gray-700 hover:bg-gray-100'
-                      : 'text-white hover:bg-white/20'
-                  }`}
-                >
-                  <span className="flex items-center space-x-3">
-                    <span className="text-lg">🔧</span>
-                    <span className="font-medium tracking-wide">Products</span>
-                  </span>
-                  <span className={`transform transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}>
-                    ▼
-                  </span>
-                </button>
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="font-medium tracking-wide">{item.name}</span>
+                    {pathname === item.href && (
+                      <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
+                    )}
+                  </Link>
+                ))}
                 
-                {/* Mobile Products Submenu */}
-                {isProductsOpen && (
-                  <div className="ml-6 mt-2 space-y-1">
-                    {productCategories.map((product) => (
-                      <Link
-                        key={product.name}
-                        href={product.href}
-                        className={`block px-4 py-3 rounded-xl transition-all duration-300 ${
-                          pathname === product.href
-                            ? isScrolled
-                              ? 'bg-blue-600 text-white'
-                              : 'bg-white text-blue-900'
-                            : isScrolled
-                              ? 'text-gray-700 hover:bg-gray-100'
+                {/* Mobile Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
+                <div className="px-2">
+                  <button
+                    onClick={() => setIsProductsOpen(!isProductsOpen)}
+                    className="flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 text-white hover:bg-white/20"
+                  >
+                    <span className="flex items-center space-x-3">
+                      <span className="text-lg">🔧</span>
+                      <span className="font-medium tracking-wide">Products</span>
+                    </span>
+                    <span className={`transform transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}>
+                      ▼
+                    </span>
+                  </button>
+                  
+                  {/* Mobile Products Submenu */}
+                  {isProductsOpen && (
+                    <div className="ml-6 mt-2 space-y-1">
+                      {productCategories.map((product) => (
+                        <Link
+                          key={product.name}
+                          href={product.href}
+                          className={`block px-4 py-3 rounded-xl transition-all duration-300 ${
+                            pathname === product.href
+                              ? 'bg-white text-blue-900'
                               : 'text-white hover:bg-white/20'
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {product.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                          }`}
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          {product.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
 
-              {/* Infrastructure - NOW AFTER PRODUCTS */}
-              <Link
-                href="/infrastructure"
-                className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                  pathname === '/infrastructure'
-                    ? isScrolled
-                      ? 'bg-blue-600 text-white shadow-lg'
-                      : 'bg-white text-blue-900 shadow-lg'
-                    : isScrolled
-                      ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                      : 'text-white hover:bg-white/20'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="text-lg">🏭</span>
-                <span className="font-medium tracking-wide">Infrastructure</span>
-                {pathname === '/infrastructure' && (
-                  <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
-                )}
-              </Link>
-
-              {/* Rest of navigation items */}
-              {navigation.slice(2).map((item) => (
+                {/* Infrastructure - NOW AFTER PRODUCTS */}
                 <Link
-                  key={item.name}
-                  href={item.href}
+                  href="/infrastructure"
                   className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                    pathname === item.href
-                      ? isScrolled
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-white text-blue-900 shadow-lg'
-                      : isScrolled
-                        ? 'text-gray-700 hover:bg-gray-100 hover:text-blue-600'
-                        : 'text-white hover:bg-white/20'
+                    pathname === '/infrastructure'
+                      ? 'bg-white text-blue-900 shadow-lg'
+                      : 'text-white hover:bg-white/20'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <span className="text-lg">{item.icon}</span>
-                  <span className="font-medium tracking-wide">{item.name}</span>
-                  {pathname === item.href && (
+                  <span className="text-lg">🏭</span>
+                  <span className="font-medium tracking-wide">Infrastructure</span>
+                  {pathname === '/infrastructure' && (
                     <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
                   )}
                 </Link>
-              ))}
+
+                {/* Rest of navigation items */}
+                {navigation.slice(2).map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
+                      pathname === item.href
+                        ? 'bg-white text-blue-900 shadow-lg'
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="font-medium tracking-wide">{item.name}</span>
+                    {pathname === item.href && (
+                      <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
+                    )}
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
