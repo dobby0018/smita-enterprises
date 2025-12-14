@@ -1,0 +1,173 @@
+[
+  {
+    "SE_CODE": "FL-912",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 912",
+    "TYPE": "Shoulder Type",
+    "BORE": "100 mm",
+    "H": "136.8 mm",
+    "KS_PART_NO": "89 495 110"
+  },
+  {
+    "SE_CODE": "FL-912",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 912",
+    "TYPE": "Shoulder Type",
+    "BORE": "100 mm",
+    "H": "137.2 mm",
+    "KS_PART_NO": "89 005 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "85.5 mm",
+    "H": "",
+    "KS_PART_NO": "88 451 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "83.0 mm",
+    "H": "",
+    "KS_PART_NO": "88 463 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "77.0 mm",
+    "H": "",
+    "KS_PART_NO": "88 459 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "87.0 mm",
+    "H": "",
+    "KS_PART_NO": "88 656 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "77.0 mm",
+    "H": "",
+    "KS_PART_NO": "88 447 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "19 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "85.5 mm",
+    "H": "",
+    "KS_PART_NO": "88 453 110"
+  },
+  {
+    "SE_CODE": "VW",
+    "MAKE": "VOLKSWAGEN",
+    "ENGINE_CODE": "22 Ribs",
+    "TYPE": "Ribbed",
+    "BORE": "85.5 mm",
+    "H": "",
+    "KS_PART_NO": "88 452 110"
+  },
+  {
+    "SE_CODE": "FL-413",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Head Seat Type",
+    "BORE": "125 mm",
+    "H": "",
+    "KS_PART_NO": "89 384 110"
+  },
+  {
+    "SE_CODE": "FL-413",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Head Seat Type",
+    "BORE": "125 mm",
+    "H": "",
+    "KS_PART_NO": "89 030 110"
+  },
+  {
+    "SE_CODE": "FL-413",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Head Seat Type",
+    "BORE": "120 mm",
+    "H": "",
+    "KS_PART_NO": "88 562 110"
+  },
+  {
+    "SE_CODE": "FL-913",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 913",
+    "TYPE": "Shoulder Type",
+    "BORE": "102 mm",
+    "H": "137.2 mm",
+    "KS_PART_NO": "88 684 110"
+  },
+  {
+    "SE_CODE": "FL-913",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 913",
+    "TYPE": "Shoulder Type",
+    "BORE": "102 mm",
+    "H": "136.8 mm",
+    "KS_PART_NO": "89 494 110"
+  },
+  {
+    "SE_CODE": "FL-913 C",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 913 C",
+    "TYPE": "Shoulder Type",
+    "BORE": "102 mm",
+    "H": "135.4 mm",
+    "KS_PART_NO": "89 341 110"
+  },
+  {
+    "SE_CODE": "FL-913 C",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 913 C",
+    "TYPE": "Shoulder Type",
+    "BORE": "102 mm",
+    "H": "134.9 mm",
+    "KS_PART_NO": "89 496 110"
+  },
+  {
+    "SE_CODE": "FL-913 G",
+    "MAKE": "DEUTZ",
+    "ENGINE_CODE": "FL 913 G",
+    "TYPE": "Shoulder Type",
+    "BORE": "102 mm",
+    "H": "124.8 mm",
+    "KS_PART_NO": "89 410 110"
+  },
+  {
+    "SE_CODE": "TATRA",
+    "MAKE": "TATRA",
+    "ENGINE_CODE": "TATRA",
+    "TYPE": "Head Seat Type",
+    "BORE": "120 mm",
+    "H": "",
+    "KS_PART_NO": "89 350 110"
+  },
+  {
+    "SE_CODE": "TATRA",
+    "MAKE": "TATRA",
+    "ENGINE_CODE": "TATRA",
+    "TYPE": "Head Seat Type",
+    "BORE": "120 mm",
+    "H": "",
+    "KS_PART_NO": "89 539 110"
+  }
+]

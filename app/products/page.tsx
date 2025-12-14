@@ -1,223 +1,297 @@
-import ProductCarousel from '../../components/ProductCarousel';
+"use client";
+import { useState } from "react";
+import Image from "next/image";
+import catalog from "../data/cylinderCatalog.json";
 
-export default function Products() {
-  const productCategories = [
-    {
-      name: 'DEUTZ AG - FL 912 Series',
-      description: 'High-performance cylinder liners with over 2.5 million units produced since inception',
-      models: [
-        { name: 'FL-912 (Shoulder length 136.8 Bore 100 mm)', partNo: '89 495 110' },
-        { name: 'FL-912 (Shoulder length 137.2 Bore 100 mm)', partNo: '89 005 110' }
-      ],
-      images: [
-        '/products/deutz-fl912/product-shot-1.jpg',
-        '/products/deutz-fl912/technical-drawing.jpg',
-        '/products/deutz-fl912/manufacturing-process.jpg',
-        '/products/deutz-fl912/quality-check.jpg'
-      ],
-      stats: '2.5M+ Units Produced',
-      features: ['High Wear Resistance', 'Precision Engineered', 'Quality Tested']
-    },
-    {
-      name: 'DEUTZ AG - FL 413 Series',
-      description: 'Heavy-duty cylinder liners for industrial applications',
-      models: [
-        { name: 'FL-413 (Head seat dia 154 mm bore 125 mm)', partNo: '89 384 110' },
-        { name: 'FL-413 (Head seat dia 150 mm bore 125 mm)', partNo: '89 030 110' },
-        { name: 'FL-413 (Head seat dia 145 mm bore 120 mm)', partNo: '88 562 110' }
-      ],
-      images: [
-        '/products/deutz-fl413/product-shot-1.jpg',
-        '/products/deutz-fl413/application-image.jpg',
-        '/products/deutz-fl413/dimensions-drawing.jpg'
-      ],
-      features: ['Robust Construction', 'Thermal Stability', 'Long Service Life']
-    },
-    {
-      name: 'DEUTZ AG - FL 913 Series',
-      description: 'Advanced cylinder liners with multiple shoulder length variations',
-      models: [
-        { name: 'FL-913 (Shoulder length 137.2 Bore 102 mm)', partNo: '88 684 110' },
-        { name: 'FL-913 (Shoulder length 136.8 Bore 102 mm)', partNo: '89 494 110' },
-        { name: 'FL-913 C (Shoulder length 135.4 Bore 102 mm)', partNo: '89 341 110' },
-        { name: 'FL-913 C (Shoulder length 134.9 Bore 102 mm)', partNo: '89 496 110' },
-        { name: 'FL-913 G (Shoulder length 124.8 Bore 102 mm)', partNo: '89 410 110' }
-      ],
-      images: [
-        '/products/deutz-fl913/product-shot-1.jpg',
-        '/products/deutz-fl913/variants-comparison.jpg',
-        '/products/deutz-fl913/installation-guide.jpg'
-      ],
-      features: ['Multiple Variants', 'High Precision', 'Optimal Heat Dissipation']
-    },
-    {
-      name: 'VOLKSWAGEN Series',
-      description: 'Premium cylinder liners for Volkswagen engines with various bore sizes',
-      models: [
-        { name: '19 Ribs bore 85.5mm', partNo: '88 451 110' },
-        { name: '19 Ribs bore 83.0mm', partNo: '88 463 110' },
-        { name: '19 Ribs bore 77.0mm', partNo: '88 459 110' },
-        { name: '19 Ribs bore 87.0mm', partNo: '88 656 110' },
-        { name: '19 Ribs bore 77.0mm', partNo: '88 447 110' },
-        { name: '19 Ribs bore 85.5mm', partNo: '88 453 110' },
-        { name: '22 Ribs bore 85.5mm', partNo: '88 452 110' }
-      ],
-      images: [
-        '/products/volkswagen/product-shot-1.jpg',
-        '/products/volkswagen/ribs-detail.jpg',
-        '/products/volkswagen/bore-comparison.jpg',
-        '/products/volkswagen/oe-quality.jpg'
-      ],
-      features: ['Multiple Rib Configurations', 'Various Bore Sizes', 'OE Quality']
-    },
-    {
-      name: 'TATRA Series',
-      description: 'Specialized cylinder liners for TATRA applications',
-      models: [
-        { name: 'Head seat dia 140 mm bore 120mm', partNo: '89 350 110' },
-        { name: 'Head seat dia 145 mm bore 120mm', partNo: '89 539 110' }
-      ],
-      images: [
-        '/products/tatra/product-shot-1.jpg',
-        '/products/tatra/heavy-duty-app.jpg',
-        '/products/tatra/special-design.jpg'
-      ],
-      features: ['Specialized Design', 'Heavy-Duty Application', 'Reliable Performance']
-    },
-    {
-      name: 'Specialty Components',
-      description: 'High-quality specialized components for industrial applications',
-      models: [
-        { name: '24% Chrome Castings', partNo: 'High Wear Resistance' },
-        { name: 'Yamazaki Mazak Housing', partNo: 'Precision Housing' },
-        { name: 'Yamazaki Mazak Turret', partNo: 'Turret Components' }
-      ],
-      images: [
-        '/products/specialty/chrome-castings.jpg',
-        '/products/specialty/mazak-housing.jpg',
-        '/products/specialty/turret-components.jpg',
-        '/products/specialty/casting-process.jpg'
-      ],
-      features: ['24% Chrome Content', 'High Wear Resistance', 'Precision Machined']
-    }
-  ];
+export default function CylinderLinersPage() {
+  const [selectedMake, setSelectedMake] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+
+  const makes = [...new Set(catalog.map((item) => item.COMPANY))];
+
+  const filtered =
+    selectedMake === ""
+      ? catalog
+      : catalog.filter((item) => item.COMPANY === selectedMake);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="container mx-auto px-4">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Products
-          </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
-            Explore our comprehensive range of high-quality cylinder liners and precision components. 
-            Each product features multiple views - click through to see technical drawings, manufacturing processes, and applications.
-          </p>
-          
-          {/* Key Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl mx-auto">
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-blue-600 mb-1">2.5M+</div>
-              <div className="text-sm text-gray-600">FL 912 Units</div>
+    <main className="w-full text-gray-800">
+      {/* ---------- HERO SECTION ---------- */}
+      <section
+        className="w-full h-[55vh] bg-cover bg-center flex items-center justify-center relative"
+        style={{
+          backgroundImage: "url('/images/liner-banner.jpg')",
+        }}
+      >
+        <div className="absolute inset-0 bg-sky-900/40 backdrop-blur-[1px]" />
+        <h1 className="relative text-5xl md:text-6xl font-bold text-white tracking-wide drop-shadow-xl">
+          Cylinder Liners & Sleeves
+        </h1>
+      </section>
+
+      {/* ---------- INTRO SECTION ---------- */}
+      <section className="py-20 container mx-auto px-5 max-w-6xl">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-5">
+            <p className="leading-7 text-lg text-gray-700">
+              Metallic Auto Liners manufactures over 350 models of Wet & Dry
+              Cylinder Liners & Sleeves with wall thicknesses from 1mm to 15mm
+              and lengths from 125mm to 370mm.
+            </p>
+            <p className="leading-7 text-lg text-gray-700">
+              We supply both semi-finished and fully-finished liners, supporting
+              local and export markets. Custom-spec liners are produced as per
+              client requirements with precision and consistency.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-6">
+            <div className="rounded-xl shadow-lg border border-sky-100 bg-white p-3">
+              <Image
+                src="/images/liner-description.jpg"
+                width={500}
+                height={500}
+                alt=""
+                className="rounded-lg"
+              />
             </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-blue-600 mb-1">25+</div>
-              <div className="text-sm text-gray-600">Product Variants</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-blue-600 mb-1">100%</div>
-              <div className="text-sm text-gray-600">Quality Tested</div>
-            </div>
-            <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
-              <div className="text-2xl font-bold text-blue-600 mb-1">ISO</div>
-              <div className="text-sm text-gray-600">Certified</div>
+            <div className="rounded-xl shadow-lg border border-sky-100 bg-white p-3">
+              <Image
+                src="/images/sleeve-description.jpg"
+                width={500}
+                height={500}
+                alt=""
+                className="rounded-lg"
+              />
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Products Grid with Carousels */}
-        <div className="space-y-12">
-          {productCategories.map((category, index) => (
-            <div key={index} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200">
-              <div className="lg:flex">
-                {/* Product Carousel */}
-                <div className="lg:w-2/5 p-6">
-                  <ProductCarousel 
-                    images={category.images} 
-                    productName={category.name}
-                  />
-                  <div className="mt-3 text-center">
-                    <p className="text-xs text-gray-500">
-                      Click arrows to view {category.images.length} images: Product shots, technical drawings & applications
-                    </p>
-                  </div>
-                </div>
+      {/* ---------- SPECIFICATIONS SECTION ---------- */}
+      <section className="py-20 bg-sky-50 border-y border-sky-100">
+        <div className="container mx-auto px-5 max-w-6xl">
+          <h2 className="text-3xl font-bold text-sky-700 text-center mb-14">
+            Specifications & Technical Details
+          </h2>
 
-                {/* Product Details */}
-                <div className="lg:w-3/5 p-6 border-t lg:border-t-0 lg:border-l border-gray-200">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900 mb-2">{category.name}</h2>
-                      <p className="text-gray-600 mb-4">{category.description}</p>
-                    </div>
-                    {category.stats && (
-                      <span className="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">
-                        {category.stats}
-                      </span>
-                    )}
-                  </div>
+          <div className="grid md:grid-cols-2 gap-14">
+            {/* Left */}
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-sky-100 space-y-6">
+              <h3 className="text-2xl font-semibold text-sky-600">
+                Product Dimensions
+              </h3>
 
-                  {/* Features */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {category.features.map((feature, idx) => (
-                      <span key={idx} className="bg-blue-50 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
+              <table className="w-full text-left text-gray-700">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="py-3 font-medium">Bore Diameter</td>
+                    <td>50–150 mm</td>
+                  </tr>
+                  <tr>
+                    <td className="py-3 font-medium">Total Length</td>
+                    <td>125–370 mm</td>
+                  </tr>
+                </tbody>
+              </table>
 
-                  {/* Models Table */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm text-left text-gray-700">
-                      <thead className="text-xs text-gray-500 uppercase bg-gray-50 border-b">
-                        <tr>
-                          <th className="px-4 py-3 font-medium">Model Specification</th>
-                          <th className="px-4 py-3 font-medium">KS Part Number</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {category.models.map((model, modelIdx) => (
-                          <tr key={modelIdx} className="border-b border-gray-200 hover:bg-gray-50">
-                            <td className="px-4 py-3 font-medium">{model.name}</td>
-                            <td className="px-4 py-3 font-mono text-blue-600">{model.partNo}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+              <div>
+                <h3 className="text-2xl font-semibold text-sky-600 mb-1">
+                  Production Capacity
+                </h3>
+                <p className="text-gray-700 text-lg">100,000 pieces per month</p>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-sky-600 mb-1">
+                  Finishes
+                </h3>
+                <p className="text-gray-700 text-lg">
+                  Semi-finished & Fully-finished
+                </p>
               </div>
             </div>
-          ))}
-        </div>
 
-        {/* Call to Action */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 text-center text-white mt-16">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">Need Detailed Product Information?</h2>
-          <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
-            Get complete technical specifications, CAD drawings, and pricing for all our products.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
-              Download Complete Catalog
-            </button>
-            <button className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300">
-              Request Technical Drawings
-            </button>
+            {/* Right */}
+            <div className="bg-white p-8 rounded-2xl shadow-md border border-sky-100 space-y-10">
+              <div>
+                <h3 className="text-2xl font-semibold text-sky-600 mb-3">
+                  Material Standards
+                </h3>
+                <table className="w-full text-left text-gray-700">
+                  <tbody>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">India</td>
+                      <td>HT200, HT250, HT300</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">USA</td>
+                      <td>NO.30, NO.35, NO.45</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">Europe</td>
+                      <td>GG20, GG25, GG30</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium">Japan</td>
+                      <td>FC200, FC250, FC300</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-sky-600 mb-3">
+                  Chemical Composition
+                </h3>
+                <table className="w-full text-left text-gray-700">
+                  <tbody>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">Carbon</td>
+                      <td>2.80–3.50</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">Silicon</td>
+                      <td>1.80–2.50</td>
+                    </tr>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">Manganese</td>
+                      <td>0.60–1.00</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium">Phosphorus</td>
+                      <td>0.20–0.50</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium">Sulphur</td>
+                      <td>0.00–0.12</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div>
+                <h3 className="text-2xl font-semibold text-sky-600 mb-3">
+                  Mechanical Properties
+                </h3>
+                <table className="w-full text-left text-gray-700">
+                  <tbody>
+                    <tr className="border-b">
+                      <td className="py-2 font-medium">Hardness</td>
+                      <td>210–280 BHN</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium">Tensile Strength</td>
+                      <td>210–275 N/mm²</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+
+      {/* ---------- CATALOG ---------- */}
+      <section className="py-24 container mx-auto px-5 max-w-7xl">
+        <h2 className="text-3xl font-bold text-center text-sky-700 mb-12">
+          Aftermarket Cylinder Liner Catalog
+        </h2>
+
+        {/* Filter */}
+        <div className="flex justify-center mb-10">
+          <select
+            className="border border-sky-300 rounded-lg px-5 py-3 bg-white shadow-sm text-gray-700 text-lg focus:ring-2 focus:ring-sky-300"
+            value={selectedMake}
+            onChange={(e) => setSelectedMake(e.target.value)}
+          >
+            <option value="">All Manufacturers</option>
+            {makes.map((m) => (
+              <option key={m}>{m}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Table */}
+        <div className="overflow-x-auto bg-white rounded-2xl shadow-xl border border-sky-100">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-sky-600 text-white text-sm uppercase tracking-wide">
+                <th className="p-4">MAL No</th>
+                <th className="p-4">Make</th>
+                <th className="p-4">Engine Code</th>
+                <th className="p-4">Bore</th>
+                <th className="p-4">Length</th>
+                <th className="p-4 text-center">Details</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {filtered.map((row, index) => (
+                <tr
+                  key={index}
+                  className="border-b hover:bg-sky-50 transition cursor-pointer"
+                >
+                  <td className="p-4">{row.MAL}</td>
+                  <td className="p-4">{row.COMPANY}</td>
+                  <td className="p-4">{row.ENGINE_CODE}</td>
+                  <td className="p-4">{row.BORE}</td>
+                  <td className="p-4">{row.LENGTH}</td>
+
+                  <td className="p-4 text-center">
+                    <button
+                      onClick={() => setSelectedProduct(row)}
+                      className="px-4 py-2 bg-sky-600 text-white rounded-lg text-sm shadow-md hover:bg-sky-700 transition"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* ---------- PRODUCT MODAL ---------- */}
+        {selectedProduct && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl p-8 w-full max-w-xl shadow-2xl relative border border-sky-200 animate-scaleIn">
+              <button
+                className="absolute right-4 top-4 text-gray-500 text-xl hover:text-black transition"
+                onClick={() => setSelectedProduct(null)}
+              >
+                ✕
+              </button>
+
+              <h3 className="text-3xl font-semibold mb-6 text-sky-700">
+                {selectedProduct.MAL}
+              </h3>
+
+              <table className="w-full text-left text-gray-700">
+                {Object.entries(selectedProduct).map(([key, val]) => {
+                  if (["IMAGE", "DRAWING"].includes(key)) return null;
+                  return (
+                    <tr key={key} className="border-b">
+                      <td className="py-2 font-medium w-1/3">{key}</td>
+                      <td className="py-2">{String(val)}</td>
+                    </tr>
+                  );
+                })}
+              </table>
+
+              {selectedProduct.DRAWING && (
+                <a
+                  href={selectedProduct.DRAWING}
+                  target="_blank"
+                  className="mt-5 inline-block text-sky-600 underline hover:text-sky-800 transition"
+                >
+                  View Technical Drawing
+                </a>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
+    </main>
   );
 }

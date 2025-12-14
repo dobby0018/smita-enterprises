@@ -4,18 +4,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
+import { Poppins } from "next/font/google";
+const SmithaFont = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
     setIsProductsOpen(false);
   }, [pathname]);
 
-  // Updated navigation order - Products before Infrastructure
   const navigation = [
     { name: 'Home', href: '/', icon: '🏠' },
     { name: 'About Us', href: '/about', icon: '👥' },
@@ -24,271 +28,203 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Contact Us', href: '/contact', icon: '📞' },
   ];
 
-  const productCategories = [
-    { name: 'Cylinder Liners', href: '/products/cylinder-liners' },
-    { name: 'Cylinder Blocks', href: '/products/cylinder-blocks' },
-    { name: 'Pistons', href: '/products/pistons' },
-    { name: 'Crankshaft', href: '/products/crankshaft' },
-    { name: 'Piston Rings', href: '/products/piston-rings' },
-    { name: 'Engine Bearings', href: '/products/engine-bearings' },
-    { name: 'Oil Seal Rings', href: '/products/oil-seal-rings' },
-    { name: 'King Pin Kits', href: '/products/king-pin-kits' },
-    { name: 'Engine Valves', href: '/products/engine-valves' },
-    { name: 'Connecting Rods', href: '/products/connecting-rods' },
-    { name: 'Piston Pin', href: '/products/piston-pin' },
-  ];
-
   const isProductPage = pathname.startsWith('/products');
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Enhanced App Bar - Always dark background */}
+
+      {/* NAV */}
       <nav className="sticky top-0 z-50 bg-gradient-to-r from-blue-900 to-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
-            {/* Logo Section with Image */}
-            <Link 
-              href="/" 
-              className="flex items-center space-x-3 group no-underline"
-            >
-              {/* Logo Image Container */}
+
+            {/* LOGO */}
+            <Link href="/" className="flex items-center space-x-3 group no-underline">
               <div className="relative w-14 h-14">
                 <Image
-                  src="/logo.png" // Replace with your logo path
+                  src="/logo.png"
                   alt="Smitha Enterprises"
                   fill
                   className="object-contain"
                   priority
-                  sizes="(max-width: 768px) 56px, 48px"
                 />
               </div>
-              
-              {/* Company Name - Hidden on mobile, shown on desktop */}
               <div className="hidden sm:flex flex-col">
-                <span className="text-xl font-bold tracking-tight text-white">
+                <span className={`text-xl font-bold tracking-tight text-white ${SmithaFont.className}`}>
                   Smitha Enterprises
                 </span>
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* DESKTOP MENU */}
             <div className="hidden lg:flex items-center space-x-1">
+
+              {/* Home + About */}
               {navigation.slice(0, 2).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
-                    pathname === item.href
-                      ? 'text-white bg-white/20' 
-                      : 'text-blue-100 hover:text-white hover:bg-white/10'
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+                    pathname === item.href ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <span className="flex items-center space-x-2">
-                    <span className="text-sm">{item.icon}</span>
+                    <span>{item.icon}</span>
                     <span className="text-sm tracking-wide">{item.name}</span>
                   </span>
-                  
-                  {/* Active indicator */}
-                  {pathname === item.href && (
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
-                  )}
                 </Link>
               ))}
-              
-              {/* Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
-              <div 
-                className="relative"
+
+              {/* PRODUCTS DROPDOWN (fixed, smooth, instant) */}
+              <div
+                className="relative hidden lg:block"
                 onMouseEnter={() => setIsProductsOpen(true)}
                 onMouseLeave={() => setIsProductsOpen(false)}
               >
                 <button
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium flex items-center space-x-2 ${
-                    isProductPage
-                      ? 'text-white bg-white/20' 
-                      : 'text-blue-100 hover:text-white hover:bg-white/10'
-                  }`}
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-200 font-medium flex items-center space-x-2 
+                    ${isProductPage ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"}`}
                 >
                   <span className="text-sm">🔧</span>
                   <span className="text-sm tracking-wide">Products</span>
                   <span className="text-xs">▼</span>
                 </button>
 
-                {/* Dropdown Menu */}
                 {isProductsOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50 max-h-80 overflow-y-auto">
-                    {productCategories.map((product) => (
-                      <Link
-                        key={product.name}
-                        href={product.href}
-                        className={`block px-4 py-3 transition-all duration-200 hover:bg-blue-50 ${
-                          pathname === product.href ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
-                        }`}
-                      >
-                        {product.name}
-                      </Link>
-                    ))}
+                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl 
+                                  border border-gray-200 py-2 z-50 animate-fadeIn">
+
+                    <Link
+                      href="/products/cylinder-liners"
+                      className={`block px-4 py-3 hover:bg-blue-50 ${
+                        pathname === "/products/cylinder-liners"
+                          ? "bg-blue-50 text-blue-600"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      Cylinder Liners
+                    </Link>
                   </div>
                 )}
               </div>
 
-              {/* Infrastructure - NOW AFTER PRODUCTS */}
+              {/* Infrastructure */}
               <Link
                 href="/infrastructure"
-                className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
-                  pathname === '/infrastructure'
-                    ? 'text-white bg-white/20' 
-                    : 'text-blue-100 hover:text-white hover:bg-white/10'
+                className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+                  pathname === "/infrastructure"
+                    ? "text-white bg-white/20"
+                    : "text-blue-100 hover:text-white hover:bg-white/10"
                 }`}
               >
                 <span className="flex items-center space-x-2">
-                  <span className="text-sm">🏭</span>
+                  <span>🏭</span>
                   <span className="text-sm tracking-wide">Infrastructure</span>
                 </span>
-                
-                {/* Active indicator */}
-                {pathname === '/infrastructure' && (
-                  <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
-                )}
               </Link>
 
-              {/* Rest of navigation items */}
+              {/* Remaining menu */}
               {navigation.slice(2).map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 group font-medium ${
-                    pathname === item.href
-                      ? 'text-white bg-white/20' 
-                      : 'text-blue-100 hover:text-white hover:bg-white/10'
+                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
+                    pathname === item.href ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <span className="flex items-center space-x-2">
-                    <span className="text-sm">{item.icon}</span>
+                    <span>{item.icon}</span>
                     <span className="text-sm tracking-wide">{item.name}</span>
                   </span>
-                  
-                  {/* Active indicator */}
-                  {pathname === item.href && (
-                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full bg-yellow-400"></div>
-                  )}
                 </Link>
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* MOBILE MENU BUTTON */}
             <button
               className="lg:hidden flex flex-col items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg hover:bg-white/10"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-1' : 'mb-1.5'
-              }`}></span>
-              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                isMenuOpen ? 'opacity-0' : 'mb-1.5'
-              }`}></span>
-              <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-1' : ''
-              }`}></span>
+              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "rotate-45 translate-y-1" : "mb-1.5"}`} />
+              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "opacity-0" : "mb-1.5"}`} />
+              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "-rotate-45 -translate-y-1" : ""}`} />
             </button>
           </div>
 
-          {/* Mobile Menu - Fixed scrolling issue */}
-          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            isMenuOpen ? 'max-h-[80vh] opacity-100 pb-4' : 'max-h-0 opacity-0'
-          }`}>
+          {/* MOBILE MENU */}
+          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-[80vh] opacity-100 pb-4" : "max-h-0 opacity-0"}`}>
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden">
-              {/* Scrollable container for mobile menu */}
               <div className="max-h-[70vh] overflow-y-auto">
-                {/* Home and About Us */}
+
+                {/* Home + About */}
                 {navigation.slice(0, 2).map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                      pathname === item.href
-                        ? 'bg-white text-blue-900 shadow-lg'
-                        : 'text-white hover:bg-white/20'
+                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
+                      pathname === item.href ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="text-lg">{item.icon}</span>
+                    <span>{item.icon}</span>
                     <span className="font-medium tracking-wide">{item.name}</span>
-                    {pathname === item.href && (
-                      <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
-                    )}
                   </Link>
                 ))}
-                
-                {/* Mobile Products Dropdown - NOW BEFORE INFRASTRUCTURE */}
-                <div className="px-2">
+
+                {/* MOBILE PRODUCT DROPDOWN */}
+                <div className="px-2 lg:hidden">
                   <button
                     onClick={() => setIsProductsOpen(!isProductsOpen)}
-                    className="flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 text-white hover:bg-white/20"
+                    className="flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl text-white hover:bg-white/20"
                   >
                     <span className="flex items-center space-x-3">
-                      <span className="text-lg">🔧</span>
+                      <span>🔧</span>
                       <span className="font-medium tracking-wide">Products</span>
                     </span>
-                    <span className={`transform transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`}>
-                      ▼
-                    </span>
+                    <span className={`transition-transform duration-200 ${isProductsOpen ? "rotate-180" : ""}`}>▼</span>
                   </button>
-                  
-                  {/* Mobile Products Submenu */}
+
                   {isProductsOpen && (
-                    <div className="ml-6 mt-2 space-y-1">
-                      {productCategories.map((product) => (
-                        <Link
-                          key={product.name}
-                          href={product.href}
-                          className={`block px-4 py-3 rounded-xl transition-all duration-300 ${
-                            pathname === product.href
-                              ? 'bg-white text-blue-900'
-                              : 'text-white hover:bg-white/20'
-                          }`}
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {product.name}
-                        </Link>
-                      ))}
+                    <div className="ml-6 mt-2 space-y-1 animate-fadeIn">
+                      <Link
+                        href="/products/cylinder-liners"
+                        className={`block px-4 py-3 rounded-xl ${
+                          pathname === "/products/cylinder-liners"
+                            ? "bg-white text-blue-900"
+                            : "text-white hover:bg-white/20"
+                        }`}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        Cylinder Liners
+                      </Link>
                     </div>
                   )}
                 </div>
 
-                {/* Infrastructure - NOW AFTER PRODUCTS */}
+                {/* Infrastructure */}
                 <Link
                   href="/infrastructure"
-                  className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                    pathname === '/infrastructure'
-                      ? 'bg-white text-blue-900 shadow-lg'
-                      : 'text-white hover:bg-white/20'
+                  className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
+                    pathname === "/infrastructure" ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <span className="text-lg">🏭</span>
+                  <span>🏭</span>
                   <span className="font-medium tracking-wide">Infrastructure</span>
-                  {pathname === '/infrastructure' && (
-                    <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
-                  )}
                 </Link>
 
-                {/* Rest of navigation items */}
+                {/* Remaining menu */}
                 {navigation.slice(2).map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl transition-all duration-300 ${
-                      pathname === item.href
-                        ? 'bg-white text-blue-900 shadow-lg'
-                        : 'text-white hover:bg-white/20'
+                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
+                      pathname === item.href ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <span className="text-lg">{item.icon}</span>
+                    <span>{item.icon}</span>
                     <span className="font-medium tracking-wide">{item.name}</span>
-                    {pathname === item.href && (
-                      <span className="ml-auto w-2 h-2 rounded-full bg-yellow-400"></span>
-                    )}
                   </Link>
                 ))}
               </div>
@@ -297,91 +233,52 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main className="flex-grow">
-        {children}
-      </main>
+      {/* CONTENT */}
+      <main className="flex-grow">{children}</main>
 
-      {/* Enhanced Footer */}
+      {/* FOOTER */}
       <footer className="bg-gradient-to-br from-gray-900 to-blue-900 text-white">
         <div className="container mx-auto px-4 py-12">
           <div className="grid md:grid-cols-4 gap-8">
-            {/* Company Info */}
+
+            {/* LOGO */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="relative w-12 h-12">
-                  <Image
-                    src="/logo.png" // Same logo as header
-                    alt="Smita Enterprises"
-                    fill
-                    className="object-contain"
-                  />
+                  <Image src="/logo.png" alt="Smitha Enterprises" fill className="object-contain" />
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold">Smita Enterprises</h3>
-                </div>
+                <h3 className={`text-xl font-bold ${SmithaFont.className}`}>Smitha Enterprises</h3>
               </div>
-              <p className="text-gray-300 mb-4 max-w-md">
-                Leading manufacturer of high-quality auto parts with international 
-                certifications and decades of expertise in automotive components.
+
+              <p className="text-gray-300 max-w-md">
+                Leading manufacturer of high-quality auto parts with international certifications and decades of expertise.
               </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 transition duration-300 cursor-pointer">
-                  <span className="text-sm">📘</span>
-                </div>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 transition duration-300 cursor-pointer">
-                  <span className="text-sm">📷</span>
-                </div>
-                <div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center hover:bg-blue-600 transition duration-300 cursor-pointer">
-                  <span className="text-sm">💼</span>
-                </div>
-              </div>
             </div>
 
-            {/* Quick Links */}
+            {/* QUICK LINKS */}
             <div>
               <h4 className="font-bold mb-4 text-lg">Quick Links</h4>
               <div className="space-y-2">
-                <Link href="/products" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
-                  Products
-                </Link>
-                <Link href="/infrastructure" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
-                  Infrastructure
-                </Link>
-                <Link href="/certifications" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
-                  Certifications
-                </Link>
-                <Link href="/about" className="block text-gray-300 hover:text-white transition duration-300 py-1 no-underline">
-                  About Us
-                </Link>
+                <Link href="/products" className="block text-gray-300 hover:text-white py-1">Products</Link>
+                <Link href="/infrastructure" className="block text-gray-300 hover:text-white py-1">Infrastructure</Link>
+                <Link href="/certifications" className="block text-gray-300 hover:text-white py-1">Certifications</Link>
+                <Link href="/about" className="block text-gray-300 hover:text-white py-1">About Us</Link>
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* CONTACT */}
             <div>
               <h4 className="font-bold mb-4 text-lg">Contact</h4>
               <div className="space-y-2 text-gray-300">
-                <p className="flex items-center space-x-2">
-                  <span>📧</span>
-                  <span>msarun71@yahoo.com</span>
-                </p>
-                <p className="flex items-center space-x-2">
-                  <span>📞</span>
-                  <span>+91 9845265394</span>
-                </p>
-                <p className="flex items-center space-x-2">
-                  <span>📍</span>
-                  <span className="text-sm">Harihar, Karnataka</span>
-                </p>
+                <p className="flex items-center space-x-2"><span>📧</span><span>msarun71@yahoo.com</span></p>
+                <p className="flex items-center space-x-2"><span>📞</span><span>+91 9845265394</span></p>
+                <p className="flex items-center space-x-2"><span>📍</span><span className="text-sm">Harihar, Karnataka</span></p>
               </div>
             </div>
           </div>
-          
-          {/* Bottom Bar */}
-          <div className="border-t border-white/20 mt-8 pt-8 text-center">
-            <p className="text-gray-400 text-sm">
-              © 2024 Smita Enterprises. All rights reserved.
-            </p>
+
+          <div className="border-t border-white/20 mt-8 pt-8 text-center text-gray-400 text-sm">
+            © 2024 Smitha Enterprises. All rights reserved.
           </div>
         </div>
       </footer>

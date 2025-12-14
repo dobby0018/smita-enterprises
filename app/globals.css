@@ -24,3 +24,34 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* Default Theme (your original dark navy style) */
+
+/* DEFAULT THEME (your original dark navy) */
+:root {
+  --nav-bg: linear-gradient(to right, #0F172A, #1E293B);
+  --footer-bg: linear-gradient(to right, #0F172A, #1E293B);
+
+  --nav-hover: rgba(255, 255, 255, 0.1);
+  --nav-active: rgba(255, 255, 255, 0.2);
+
+  --blue-accent: #29ABE2; /* used for dropdown highlights */
+}
+
+/* BLUE THEME (better with orange logo) */
+.blue-theme {
+  --nav-bg: linear-gradient(to right, #1F8FC4, #156FA0);
+  --footer-bg: linear-gradient(to right, #1F8FC4, #156FA0);
+
+  --nav-hover: rgba(255, 255, 255, 0.15);
+  --nav-active: rgba(255, 255, 255, 0.25);
+
+  --blue-accent: #1F8FC4;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn .18s ease-out;
+}

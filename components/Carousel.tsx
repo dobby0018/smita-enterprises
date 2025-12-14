@@ -38,7 +38,7 @@ export default function Carousel() {
           >
             <div className="w-full h-full bg-gradient-to-r from-blue-900 to-gray-900 flex items-center justify-center">
               <div className="text-center text-white">
-                <h2 className="text-4xl md:text-6xl font-bold mb-4">Smita Enterprises</h2>
+                <h2 className="text-4xl md:text-6xl font-bold mb-4">Smitha Enterprises</h2>
                 <p className="text-xl md:text-2xl">Premium Auto Parts Manufacturer</p>
               </div>
             </div>

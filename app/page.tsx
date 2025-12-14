@@ -1,22 +1,37 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="min-h-screen">
-      {/* Enhanced Hero Section - Mobile Optimized */}
+      {/* Enhanced Hero Section with Casting Background */}
       <section className="relative bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white py-16 lg:py-32 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 to-gray-900/50"></div>
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <Image
+            src="/casting-background.png" // Your casting image path
+            alt="Precision Casting Process"
+            fill
+            className="object-cover"
+            priority
+            quality={85}
+            sizes="100vw"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-blue-900/60 to-gray-900/80"></div>
+        </div>
         
         {/* Decorative Elements */}
-        <div className="absolute top-10 left-10 w-16 h-16 bg-blue-500/10 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-400/10 rounded-full blur-2xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-white/5 rounded-full blur-lg"></div>
+        <div className="absolute top-10 left-10 w-16 h-16 bg-blue-500/20 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-10 w-24 h-24 bg-blue-400/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-white/10 rounded-full blur-lg"></div>
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-600/20 border border-blue-400/30 mb-6">
+            <div className="inline-flex items-center px-3 py-1.5 rounded-full bg-blue-600/30 border border-blue-400/40 mb-6 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 bg-blue-400 rounded-full mr-2 animate-pulse"></span>
               <span className="text-blue-200 text-xs font-medium">Trusted Since 1996</span>
             </div>
@@ -33,22 +48,22 @@ export default function Home() {
             </h1>
 
             {/* Subheading */}
-            <p className="text-base sm:text-lg lg:text-xl mb-6 lg:mb-8 text-blue-100 leading-relaxed max-w-3xl mx-auto px-2">
+            <p className="text-base sm:text-lg lg:text-xl mb-6 lg:mb-8 text-blue-100 leading-relaxed max-w-3xl mx-auto px-2 backdrop-blur-sm bg-white/5 rounded-lg py-2">
               Leading manufacturer of <span className="text-white font-semibold">shell moulded castings</span> and{' '}
               <span className="text-white font-semibold">air-cooled liners</span> for the global automotive industry
             </p>
 
             {/* Stats Bar */}
             <div className="grid grid-cols-3 gap-4 sm:gap-6 mb-8 lg:mb-10 max-w-2xl mx-auto px-2">
-              <div className="text-center">
+              <div className="text-center backdrop-blur-sm bg-white/10 rounded-lg py-3">
                 <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">25+</div>
                 <div className="text-blue-200 text-xs sm:text-sm">Years Experience</div>
               </div>
-              <div className="text-center border-x border-blue-700/50 px-2">
+              <div className="text-center border-x border-blue-700/50 px-2 backdrop-blur-sm bg-white/10 rounded-lg py-3">
                 <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">10K+</div>
                 <div className="text-blue-200 text-xs sm:text-sm">Monthly Production</div>
               </div>
-              <div className="text-center">
+              <div className="text-center backdrop-blur-sm bg-white/10 rounded-lg py-3">
                 <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1">250+</div>
                 <div className="text-blue-200 text-xs sm:text-sm">Skilled Team</div>
               </div>
@@ -70,7 +85,7 @@ export default function Home() {
               
               <Link 
                 href="/products" 
-                className="group relative border-2 border-white text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto text-center"
+                className="group relative border-2 border-white text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-600 transition-all duration-300 transform hover:scale-105 w-full sm:w-auto text-center backdrop-blur-sm bg-white/10"
               >
                 <span className="relative z-10 flex items-center justify-center">
                   Explore Products
@@ -83,7 +98,7 @@ export default function Home() {
 
             {/* Scroll Indicator */}
             <div className="mt-12 lg:mt-16 animate-bounce">
-              <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center mx-auto">
+              <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-white/30 rounded-full flex justify-center mx-auto backdrop-blur-sm bg-white/10">
                 <div className="w-1 h-2 sm:h-3 bg-white/50 rounded-full mt-2"></div>
               </div>
               <p className="text-white/60 text-xs sm:text-sm mt-2">Scroll to explore</p>
@@ -182,7 +197,7 @@ export default function Home() {
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 sm:mr-4 mt-0.5 flex-shrink-0">
                     <span className="text-green-600 font-bold text-sm sm:text-base">✓</span>
                   </div>
-                  <span className="text-gray-700 text-sm sm:text-base">30,000+ sq. ft. Manufacturing Space</span>
+                  <span className="text-gray-700 text-sm sm:text-base">45000+ sq. ft. Manufacturing Space</span>
                 </div>
                 <div className="flex items-start">
                   <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center mr-3 sm:mr-4 mt-0.5 flex-shrink-0">
@@ -235,86 +250,94 @@ export default function Home() {
       </section>
 
       {/* Products Preview - Mobile Optimized */}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
-              Our Core Products
-            </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
-              Specializing in shell moulded castings with a strong focus on air-cooled liners, 
-              ranging from 760 grams to 250 kilograms
-            </p>
-          </div>
+<section className="py-12 sm:py-16 bg-white">
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-8 sm:mb-12">
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4">
+        Our Core Products
+      </h2>
+      <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-2">
+        Specializing in shell moulded castings with a strong focus on air-cooled liners,
+        ranging from 760 grams to 250 kilograms
+      </p>
+    </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
-            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition duration-300">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl sm:text-2xl">🔩</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Cylinder Liners</h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">
-                Precision-engineered air-cooled liners for optimal thermal performance and durability
-              </p>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition duration-300">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl sm:text-2xl">🏗️</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Cylinder Heads</h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">
-                High-quality cylinder heads manufactured to exacting standards for automotive applications
-              </p>
-            </div>
-            <div className="bg-gray-50 rounded-xl p-4 sm:p-6 text-center hover:shadow-lg transition duration-300">
-              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                <span className="text-xl sm:text-2xl">⚙️</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">Special Castings</h3>
-              <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4">
-                Custom shell moulded castings tailored to specific customer requirements
-              </p>
-            </div>
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-8 sm:mb-12">
 
-          <div className="text-center">
-            <Link 
-              href="/products" 
-              className="inline-flex items-center bg-gray-900 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 transition duration-300"
-            >
-              View All Products
-              <span className="ml-1 sm:ml-2">→</span>
-            </Link>
-          </div>
+      {/* Cylinder Liners */}
+      <div className="bg-gray-50 rounded-xl p-5 sm:p-6 text-center hover:shadow-lg transition duration-300">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 flex items-center justify-center rounded-full bg-blue-100">
+          <Image
+            src="/images/products/cylinder-liner.png"
+            alt="Cylinder Liners"
+            width={64}
+            height={64}
+            className="object-contain"
+          />
         </div>
-      </section>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+          Cylinder Liners
+        </h3>
+        <p className="text-gray-600 text-sm sm:text-base">
+          Precision-engineered air-cooled liners for optimal thermal performance and durability
+        </p>
+      </div>
+
+      {/* Cylinder Heads */}
+      <div className="bg-gray-50 rounded-xl p-5 sm:p-6 text-center hover:shadow-lg transition duration-300">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 flex items-center justify-center rounded-full bg-green-100">
+          <Image
+            src="/images/products/cylinder-head.png"
+            alt="Cylinder Heads"
+            width={64}
+            height={64}
+            className="object-contain"
+          />
+        </div>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+          Cylinder Heads
+        </h3>
+        <p className="text-gray-600 text-sm sm:text-base">
+          High-quality cylinder heads manufactured to exacting standards for automotive applications
+        </p>
+      </div>
+
+      {/* Special Castings */}
+      <div className="bg-gray-50 rounded-xl p-5 sm:p-6 text-center hover:shadow-lg transition duration-300">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 flex items-center justify-center rounded-full bg-purple-100">
+          <Image
+            src="/images/products/special-castings.png"
+            alt="Special Castings"
+            width={64}
+            height={64}
+            className="object-contain"
+          />
+        </div>
+        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+          Special Castings
+        </h3>
+        <p className="text-gray-600 text-sm sm:text-base">
+          Custom shell moulded castings tailored to specific customer requirements
+        </p>
+      </div>
+
+    </div>
+
+    <div className="text-center">
+      <Link
+        href="/products/cylinder-liners"
+        className="inline-flex items-center bg-gray-900 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-800 transition duration-300"
+      >
+        View All Products
+        <span className="ml-1 sm:ml-2">→</span>
+      </Link>
+    </div>
+  </div>
+</section>
+
 
       {/* CTA Section - Mobile Optimized */}
-      <section className="py-12 sm:py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4">
-            Ready to Partner with Us?
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-blue-100 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Join the growing list of OEMs and manufacturers who trust Smitha Enterprises 
-            for their precision casting needs
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <Link 
-              href="/contact" 
-              className="bg-white text-blue-600 px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-gray-100 transition duration-300"
-            >
-              Get In Touch
-            </Link>
-            <Link 
-              href="/certifications" 
-              className="border-2 border-white text-white px-6 py-3 sm:px-8 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-white hover:text-blue-600 transition duration-300"
-            >
-              View Certifications
-            </Link>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 }

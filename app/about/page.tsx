@@ -1,45 +1,6 @@
 import Link from 'next/link';
 
 export default function About() {
-  const milestones = [
-    {
-      year: "1996",
-      title: "The Foundation",
-      description: "Smitha Enterprises was established in Harihar, Karnataka, with a vision to revolutionize precision casting in the automotive industry.",
-      icon: "🏭"
-    },
-    {
-      year: "2001",
-      title: "First Major Breakthrough",
-      description: "Secured our first major OEM partnership, establishing credibility in the automotive components market.",
-      icon: "🚀"
-    },
-    {
-      year: "2008",
-      title: "Capacity Expansion",
-      description: "Expanded our manufacturing facility to 30,000 sq. ft. and installed advanced shell moulding technology.",
-      icon: "📈"
-    },
-    {
-      year: "2015",
-      title: "Quality Certification",
-      description: "Achieved ISO 9001:2015 certification, marking our commitment to international quality standards.",
-      icon: "⭐"
-    },
-    {
-      year: "2020",
-      title: "Production Milestone",
-      description: "Reached monthly production capacity of 10,000+ air-cooled blocks, serving leading automotive brands.",
-      icon: "🎯"
-    },
-    {
-      year: "2024",
-      title: "Industry Leadership",
-      description: "Recognized as a trusted manufacturer for OEMs and Tier-1 suppliers with 250+ skilled professionals.",
-      icon: "👑"
-    }
-  ];
-
   const values = [
     {
       icon: "🎯",
@@ -65,9 +26,19 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-blue-900 via-gray-900 to-blue-800 text-white py-16 lg:py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-10"></div>
+      {/* Hero Section with Background Image */}
+      <section className="relative bg-gray-900 text-white py-16 lg:py-20 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/about-hero-bg.png')",
+          }}
+        >
+          {/* Overlay for better text readability */}
+          <div className="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
+        </div>
+        
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/20 border border-blue-400/30 mb-6">
@@ -124,7 +95,7 @@ export default function About() {
                   </p>
                   <div className="grid grid-cols-2 gap-3 lg:gap-4 text-sm">
                     <div className="bg-white rounded-lg p-3">
-                      <div className="font-bold text-blue-600 text-base lg:text-lg">30,000+</div>
+                      <div className="font-bold text-blue-600 text-base lg:text-lg">45000+</div>
                       <div className="text-gray-600 text-xs lg:text-sm">Sq. Ft. Facility</div>
                     </div>
                     <div className="bg-white rounded-lg p-3">
@@ -136,53 +107,32 @@ export default function About() {
               </div>
             </div>
 
-            {/* Timeline - Mobile Responsive */}
+            {/* Key Achievements Grid - Replacing Timeline */}
             <div className="mb-12 lg:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 text-center mb-8 lg:mb-12">Our Journey Through Time</h2>
-              <div className="relative">
-                {/* Timeline line - Hidden on mobile, visible on desktop */}
-                <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-1 bg-blue-200 h-full"></div>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 text-center mb-8 lg:mb-12">Our Key Achievements</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 lg:p-8 text-center border border-blue-200">
+                  <div className="text-4xl lg:text-5xl mb-4">🏆</div>
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Industry Recognition</h3>
+                  <p className="text-gray-600 text-sm lg:text-base">
+                    Trusted by leading OEMs and Tier-1 manufacturers for over 25 years
+                  </p>
+                </div>
                 
-                {/* Timeline items */}
-                <div className="space-y-8 lg:space-y-12">
-                  {milestones.map((milestone, index) => (
-                    <div key={index} className="relative">
-                      {/* Mobile Layout */}
-                      <div className="lg:hidden bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-200">
-                        <div className="flex items-center mb-3">
-                          <span className="text-xl sm:text-2xl mr-3">{milestone.icon}</span>
-                          <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                            {milestone.year}
-                          </span>
-                        </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                        <p className="text-gray-600 text-sm sm:text-base">{milestone.description}</p>
-                      </div>
-
-                      {/* Desktop Layout */}
-                      <div className={`hidden lg:flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                        {/* Content */}
-                        <div className={`w-1/2 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
-                          <div className="bg-white rounded-2xl shadow-lg p-6 border border-gray-200 hover:shadow-xl transition duration-300">
-                            <div className="flex items-center mb-3">
-                              <span className="text-2xl mr-3">{milestone.icon}</span>
-                              <span className="text-sm font-semibold text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                                {milestone.year}
-                              </span>
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-2">{milestone.title}</h3>
-                            <p className="text-gray-600">{milestone.description}</p>
-                          </div>
-                        </div>
-                        
-                        {/* Year marker */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg"></div>
-                        
-                        {/* Empty space for the other side */}
-                        <div className="w-1/2"></div>
-                      </div>
-                    </div>
-                  ))}
+                <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl p-6 lg:p-8 text-center border border-green-200">
+                  <div className="text-4xl lg:text-5xl mb-4">📈</div>
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Production Excellence</h3>
+                  <p className="text-gray-600 text-sm lg:text-base">
+                    10,000+ air-cooled blocks monthly capacity with consistent quality
+                  </p>
+                </div>
+                
+                <div className="bg-gradient-to-br from-purple-50 to-white rounded-2xl p-6 lg:p-8 text-center border border-purple-200">
+                  <div className="text-4xl lg:text-5xl mb-4">🌍</div>
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-3">Global Standards</h3>
+                  <p className="text-gray-600 text-sm lg:text-base">
+                    ISO 9001:2015 certified processes meeting international quality standards
+                  </p>
                 </div>
               </div>
             </div>
