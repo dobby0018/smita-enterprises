@@ -7,12 +7,12 @@ export default function CylinderLinersPage() {
   const [selectedMake, setSelectedMake] = useState("");
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
 
-  const makes = [...new Set(catalog.map((item) => item.COMPANY))];
+  const makes = [...new Set(catalog.map((item) => item.MAKE))];
 
   const filtered =
     selectedMake === ""
       ? catalog
-      : catalog.filter((item) => item.COMPANY === selectedMake);
+      : catalog.filter((item) => item.MAKE === selectedMake);
 
   return (
     <main className="w-full text-gray-800">
@@ -233,7 +233,7 @@ export default function CylinderLinersPage() {
                   className="border-b hover:bg-sky-50 transition cursor-pointer"
                 >
                   <td className="p-4">{row.MAL}</td>
-                  <td className="p-4">{row.COMPANY}</td>
+                  <td className="p-4">{row.C}</td>
                   <td className="p-4">{row.ENGINE_CODE}</td>
                   <td className="p-4">{row.BORE}</td>
                   <td className="p-4">{row.LENGTH}</td>
