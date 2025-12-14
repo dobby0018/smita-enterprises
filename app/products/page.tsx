@@ -232,11 +232,11 @@ export default function CylinderLinersPage() {
                   key={index}
                   className="border-b hover:bg-sky-50 transition cursor-pointer"
                 >
-                  <td className="p-4">{row.MAL}</td>
-                  <td className="p-4">{row.C}</td>
+                  <td className="p-4">{row.SE_CODE}</td>
+                  <td className="p-4">{row.MAKE}</td>
                   <td className="p-4">{row.ENGINE_CODE}</td>
                   <td className="p-4">{row.BORE}</td>
-                  <td className="p-4">{row.LENGTH}</td>
+                  <td className="p-4">{row.H}</td>
 
                   <td className="p-4 text-center">
                     <button
