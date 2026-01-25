@@ -1,84 +1,44 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import catalog from "../../data/cylinderCatalog.json";
-
-// ---------------- IMAGE GROUPS (PNG) ---------------- //
-const imageGroups: Record<string, string[]> = {
-  fl912: ["/images/liners/fl912-1.png", "/images/liners/fl912-2.png"],
-  vw: [
-    "/images/liners/vw-1.png",
-    "/images/liners/vw-2.png",
-    "/images/liners/vw-3.png",
-  ],
-  fl413: [
-    "/images/liners/fl413-1.png",
-    "/images/liners/fl413-2.png",
-    "/images/liners/fl413-3.png",
-  ],
-  fl913: ["/images/liners/fl913-1.png", "/images/liners/fl913-2.png"],
-  tatra: [
-    "/images/liners/tatra-1.png",
-    "/images/liners/tatra-2.png",
-  ],
-};
-
-// Auto-detect image group
-const getImageGroupKey = (seCode: string | undefined): string | null => {
-  if (!seCode) return null;
-  if (seCode.startsWith("FL-912")) return "fl912";
-  if (seCode.startsWith("FL-413")) return "fl413";
-  if (seCode.startsWith("FL-913")) return "fl913";
-  if (seCode.startsWith("VW")) return "vw";
-  if (seCode.startsWith("TATRA")) return "tatra";
-  return null;
-};
 
 export default function CylinderLinersPage() {
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [selectedMake, setSelectedMake] = useState("");
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const makes = [...new Set(catalog.map((item) => item.MAKE))];
+  // Normalize makes: trim and remove empty values, keep original casing for display
+  const makesSet = new Set(
+    catalog
+      .map((item) => (item.MAKE ?? "").toString().trim())
+      .filter((m) => m.length > 0)
+  );
+  const makes = Array.from(makesSet);
 
   const filtered =
     selectedMake === ""
       ? catalog
-      : catalog.filter((item) => item.MAKE === selectedMake);
-
-  const groupKey = getImageGroupKey(selectedProduct?.SE_CODE);
-  const currentImages = groupKey ? imageGroups[groupKey] : [];
-
-  useEffect(() => setCurrentImageIndex(0), [selectedProduct]);
-
-  useEffect(() => {
-    if (!selectedProduct || currentImages.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % currentImages.length);
-    }, 2000);
-
-    return () => clearInterval(interval);
-  }, [selectedProduct, currentImages]);
-
-  const prevImage = () =>
-    setCurrentImageIndex(
-      (prev) => (prev - 1 + currentImages.length) % currentImages.length
-    );
-
-  const nextImage = () => 
-    setCurrentImageIndex((prev) => (prev + 1) % currentImages.length);
+      : catalog.filter(
+          (item) =>
+            (item.MAKE ?? "")
+              .toString()
+              .trim()
+              .toLowerCase() === selectedMake.toString().trim().toLowerCase()
+        );
 
   return (
     <main className="min-h-screen bg-gray-50 text-gray-800">
 
-      {/* ---------------- HERO SECTION ---------------- */}
-      <section className="relative bg-gray-900 text-white py-16 md:py-24 overflow-hidden">
+      {/* ---------------- HERO SECTION (slightly decreased height) ---------------- */}
+      <section
+        className="relative bg-gray-900 text-white py-20 md:py-28 lg:py-32 overflow-hidden"
+        aria-hidden={false}
+      >
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/liner-banner.jpg')" }}
+          style={{ backgroundImage: "url('/images/liner-banner.png')" }}
         >
-          <div className="absolute inset-0 bg-blue-900/70 mix-blend-multiply" />
+          <div className="absolute inset-0 bg-blue-900/72 mix-blend-multiply" />
         </div>
 
         <div className="relative z-10 container mx-auto px-4 text-center">
@@ -114,10 +74,13 @@ export default function CylinderLinersPage() {
               value={selectedMake}
               onChange={(e) => setSelectedMake(e.target.value)}
               className="w-full px-5 py-3 rounded-xl border border-blue-300 bg-white text-gray-700 text-lg focus:ring-2 focus:ring-blue-400"
+              aria-label="Filter by manufacturer"
             >
               <option value="">All Manufacturers</option>
               {makes.map((m) => (
-                <option key={m}>{m}</option>
+                <option key={m} value={m}>
+                  {m}
+                </option>
               ))}
             </select>
           </div>
@@ -125,21 +88,14 @@ export default function CylinderLinersPage() {
 
         {/* TABLE */}
         <div className="rounded-3xl shadow-2xl border border-blue-100 bg-white overflow-hidden">
-
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-5">
             <h3 className="text-lg font-semibold text-white">Product Specifications</h3>
           </div>
 
-          {/* List style for mobile */}
           <div className="divide-y divide-gray-100">
             {filtered.map((row, idx) => (
-              <div
-                key={idx}
-                className="group transition-all duration-300 hover:bg-blue-50/70"
-              >
+              <div key={idx} className="group transition-all duration-300 hover:bg-blue-50/70">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 p-5">
-
-                  {/* Each item adjusts for phone screens */}
                   <div>
                     <p className="text-gray-500 text-xs">SE Code</p>
                     <p className="font-semibold">{row.SE_CODE}</p>
@@ -167,10 +123,9 @@ export default function CylinderLinersPage() {
 
                   <div>
                     <p className="text-gray-500 text-xs">H (Shoulder)</p>
-                    <p className="font-semibold">{row.H || "-"}</p>
+                    <p className="font-semibold">{row.H ?? "-"}</p>
                   </div>
 
-                  {/* Button row always stays tidy */}
                   <div className="flex justify-between items-center">
                     <div>
                       <p className="text-gray-500 text-xs">KS Part No</p>
@@ -179,7 +134,8 @@ export default function CylinderLinersPage() {
 
                     <button
                       onClick={() => setSelectedProduct(row)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-medium shadow hover:bg-blue-700"
+                      className="ml-3 px-4 py-2 bg-blue-600 text-white rounded-xl text-xs font-medium shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                      aria-label={`View details for ${row.SE_CODE}`}
                     >
                       View
                     </button>
@@ -192,97 +148,112 @@ export default function CylinderLinersPage() {
           </div>
         </div>
 
-        {/* ---------------- MODAL ---------------- */}
-        {selectedProduct && (
-          <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center p-3 z-50">
+        {/* ---------------- MODAL (compact) ---------------- */}
+      {/* ---------------- MODAL (cleaned & non-duplicated) ---------------- */}
+{selectedProduct && (
+  <div
+    className="fixed inset-0 bg-black/25 z-50 flex items-center justify-center"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div className="w-full mx-4 max-w-3xl">
+      <div className="bg-white rounded-2xl shadow-2xl border border-blue-100 overflow-hidden">
 
-            <div className="bg-white rounded-3xl p-6 w-full max-w-4xl shadow-2xl border border-blue-200 relative">
-
-              {/* CLOSE BUTTON */}
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="absolute top-4 right-4 w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 
-                           flex items-center justify-center text-xl text-gray-700"
-              >
-                ✕
-              </button>
-
-              {/* Mobile: 1 column | Desktop: 2 columns */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                {/* IMAGE CAROUSEL */}
-                <div className="w-full flex items-center justify-center">
-
-                  <div className="relative w-full h-60 sm:h-72 rounded-2xl overflow-hidden 
-                                  border border-blue-100 bg-white flex items-center justify-center">
-
-                    <img
-                      src={currentImages[currentImageIndex]}
-                      alt={selectedProduct.SE_CODE}
-                      className="max-h-full max-w-full object-contain p-4"
-                    />
-
-                    {/* Arrows */}
-                    {currentImages.length > 1 && (
-                      <>
-                        <button
-                          onClick={prevImage}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white 
-                                     shadow-md rounded-full w-8 h-8 flex items-center justify-center"
-                        >
-                          ‹
-                        </button>
-
-                        <button
-                          onClick={nextImage}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white 
-                                     shadow-md rounded-full w-8 h-8 flex items-center justify-center"
-                        >
-                          ›
-                        </button>
-                      </>
-                    )}
-
-                    {/* Dots */}
-                    {currentImages.length > 1 && (
-                      <div className="absolute bottom-3 inset-x-0 flex items-center justify-center gap-2">
-                        {currentImages.map((_, i) => (
-                          <span
-                            key={i}
-                            className={`h-2.5 w-2.5 rounded-full border border-white ${
-                              i === currentImageIndex ? "bg-white" : "bg-white/40"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* DETAILS */}
-                <div className="grid gap-3 sm:gap-4">
-                  {[
-                    ["Make", selectedProduct.MAKE],
-                    ["Engine Code", selectedProduct.ENGINE_CODE],
-                    ["Type", selectedProduct.TYPE],
-                    ["Bore", selectedProduct.BORE],
-                    ["Shoulder Length (H)", selectedProduct.H || "-"],
-                    ["KS Part No", selectedProduct.KS_PART_NO],
-                  ].map(([label, value], idx) => (
-                    <div key={idx} className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                      <p className="text-blue-800 text-sm">{label}</p>
-                      <p className="font-semibold text-lg break-words">{value}</p>
-                    </div>
-                  ))}
-                </div>
-
-              </div>
-
-            </div>
+        {/* Header */}
+        <div className="flex items-start justify-between px-5 py-4 border-b border-blue-50">
+          <div>
+            <p className="text-gray-500 text-xs">SE Code</p>
+            <p className="font-semibold text-xl sm:text-2xl">
+              {selectedProduct.SE_CODE}
+            </p>
+            <p className="text-gray-500 text-sm mt-1">
+              {selectedProduct.TYPE}
+            </p>
           </div>
-        )}
+
+          <button
+            onClick={() => setSelectedProduct(null)}
+            className="w-9 h-9 rounded-full bg-gray-200 hover:bg-gray-300 
+                       flex items-center justify-center text-lg text-gray-700"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="p-5 max-h-[65vh] overflow-auto">
+          <div className="grid gap-5 md:grid-cols-2">
+
+            {/* LEFT: Overview */}
+            <div className="rounded-xl border border-blue-100 p-4">
+              <p className="text-gray-500 text-xs mb-2">Overview</p>
+
+              <div className="space-y-3 text-sm">
+                <div>
+                  <p className="text-gray-500 text-xs">Make</p>
+                  <p className="font-semibold">{selectedProduct.MAKE}</p>
+                </div>
+
+                <div>
+                  <p className="text-gray-500 text-xs">Engine Code</p>
+                  <p className="font-semibold">{selectedProduct.ENGINE_CODE}</p>
+                </div>
+
+                <div>
+                  <p className="text-gray-500 text-xs">KS Part No</p>
+                  <p className="font-semibold">{selectedProduct.KS_PART_NO}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: Technical Specs */}
+            <div className="grid gap-3">
+              {[
+                ["Bore", selectedProduct.BORE],
+                ["A", selectedProduct.A],
+                ["C", selectedProduct.C],
+                ["H (Shoulder)", selectedProduct.H],
+                ["L", selectedProduct.L],
+              ].map(([label, value], idx) => (
+                <div
+                  key={idx}
+                  className="bg-blue-50 rounded-xl p-3 border border-blue-100"
+                >
+                  <p className="text-blue-800 text-xs">{label}</p>
+                  <p className="font-semibold text-base">{value ?? "-"}</p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="px-5 py-4 border-t border-blue-50 flex justify-end">
+          <button
+            onClick={() => setSelectedProduct(null)}
+            className="px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 text-sm"
+          >
+            Close
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+)}
 
       </section>
     </main>
+  );
+}
+
+/* Compact small field used in modal footer area */
+function SmallField({ label, value }: { label: string; value: string | number | undefined }) {
+  return (
+    <div className="bg-white rounded-lg p-2 border border-blue-50">
+      <p className="text-gray-500 text-xs">{label}</p>
+      <p className="font-semibold text-sm">{value ?? "-"}</p>
+    </div>
   );
 }

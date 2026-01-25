@@ -1,21 +1,25 @@
 'use client';
-import { useState, useEffect } from 'react';
+
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { Poppins } from 'next/font/google';
 
-import { Poppins } from "next/font/google";
 const SmithaFont = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
 });
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const pathname = usePathname();
+  const [isProductsOpen, setIsProductsOpen] = useState(false); // used for both desktop hover and mobile accordion
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const pathname = usePathname() ?? '/';
 
   useEffect(() => {
+    // close menus on route change
     setIsMenuOpen(false);
     setIsProductsOpen(false);
   }, [pathname]);
@@ -28,29 +32,38 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     { name: 'Contact Us', href: '/contact', icon: '📞' },
   ];
 
+  const products = [
+    { name: 'Cylinder Liners', href: '/products/cylinder-liners' },
+    // add more product links here if needed
+  ];
+
   const isProductPage = pathname.startsWith('/products');
+
+  // desktop hover handlers
+  const handleMouseEnter = () => {
+    if (closeTimeout.current) clearTimeout(closeTimeout.current);
+    setIsProductsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeout.current = setTimeout(() => {
+      setIsProductsOpen(false);
+    }, 120);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
-
       {/* NAV */}
       <nav className="sticky top-0 z-50 bg-gradient-to-r from-blue-900 to-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
-
             {/* LOGO */}
-            <Link href="/" className="flex items-center space-x-3 group no-underline">
+            <Link href="/" className="flex items-center space-x-3 no-underline">
               <div className="relative w-14 h-14">
-                <Image
-                  src="/logo.png"
-                  alt="Smitha Enterprises"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+                <Image src="/logo.png" alt="Smitha Enterprises" fill className="object-contain" priority />
               </div>
               <div className="hidden sm:flex flex-col">
-                <span className={`text-xl font-bold tracking-tight text-white ${SmithaFont.className}`}>
+                <span className={`text-xl font-bold text-white ${SmithaFont.className}`}>
                   Smitha Enterprises
                 </span>
               </div>
@@ -58,178 +71,181 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
             {/* DESKTOP MENU */}
             <div className="hidden lg:flex items-center space-x-1">
-
-              {/* Home + About */}
-              {navigation.slice(0, 2).map((item) => (
+              {navigation.slice(0, 2).map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
-                    pathname === item.href ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"
+                  className={`px-4 py-2 rounded-lg transition-all font-medium ${
+                    pathname === item.href
+                      ? 'text-white bg-white/20'
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span className="flex items-center space-x-2">
                     <span>{item.icon}</span>
-                    <span className="text-sm tracking-wide">{item.name}</span>
+                    <span className="text-sm">{item.name}</span>
                   </span>
                 </Link>
               ))}
 
-              {/* PRODUCTS DROPDOWN (fixed, smooth, instant) */}
+              {/* PRODUCTS DROPDOWN – DESKTOP (hover) */}
               <div
                 className="relative hidden lg:block"
-                onMouseEnter={() => setIsProductsOpen(true)}
-                onMouseLeave={() => setIsProductsOpen(false)}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 <button
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-200 font-medium flex items-center space-x-2 
-                    ${isProductPage ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"}`}
+                  type="button"
+                  aria-expanded={isProductsOpen}
+                  aria-haspopup="menu"
+                  className={`px-4 py-2 rounded-lg transition-all font-medium flex items-center space-x-2 ${
+                    isProductPage
+                      ? 'text-white bg-white/20'
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
+                  }`}
                 >
-                  <span className="text-sm">🔧</span>
-                  <span className="text-sm tracking-wide">Products</span>
+                  <span>🔧</span>
+                  <span className="text-sm">Products</span>
                   <span className="text-xs">▼</span>
                 </button>
 
-                {isProductsOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl 
-                                  border border-gray-200 py-2 z-50 animate-fadeIn">
-
+                <div
+                  className={`absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50
+                    transition-all duration-200
+                    ${isProductsOpen
+                      ? 'opacity-100 translate-y-0 pointer-events-auto'
+                      : 'opacity-0 -translate-y-1 pointer-events-none'
+                    }`}
+                  role="menu"
+                >
+                  {products.map(p => (
                     <Link
-                      href="/products/cylinder-liners"
-                      className={`block px-4 py-3 hover:bg-blue-50 ${
-                        pathname === "/products/cylinder-liners"
-                          ? "bg-blue-50 text-blue-600"
-                          : "text-gray-700"
+                      key={p.href}
+                      href={p.href}
+                      className={`block px-4 py-3 transition-colors ${
+                        pathname === p.href ? 'bg-blue-50 text-blue-600' : 'text-gray-700 hover:bg-blue-50'
                       }`}
                     >
-                      Cylinder Liners
+                      {p.name}
                     </Link>
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
 
               {/* Infrastructure */}
               <Link
                 href="/infrastructure"
-                className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
-                  pathname === "/infrastructure"
-                    ? "text-white bg-white/20"
-                    : "text-blue-100 hover:text-white hover:bg-white/10"
+                className={`px-4 py-2 rounded-lg transition-all font-medium ${
+                  pathname === '/infrastructure'
+                    ? 'text-white bg-white/20'
+                    : 'text-blue-100 hover:text-white hover:bg-white/10'
                 }`}
               >
                 <span className="flex items-center space-x-2">
                   <span>🏭</span>
-                  <span className="text-sm tracking-wide">Infrastructure</span>
+                  <span className="text-sm">Infrastructure</span>
                 </span>
               </Link>
 
-              {/* Remaining menu */}
-              {navigation.slice(2).map((item) => (
+              {navigation.slice(2).map(item => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-lg transition-all duration-300 font-medium ${
-                    pathname === item.href ? "text-white bg-white/20" : "text-blue-100 hover:text-white hover:bg-white/10"
+                  className={`px-4 py-2 rounded-lg transition-all font-medium ${
+                    pathname === item.href
+                      ? 'text-white bg-white/20'
+                      : 'text-blue-100 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <span className="flex items-center space-x-2">
                     <span>{item.icon}</span>
-                    <span className="text-sm tracking-wide">{item.name}</span>
+                    <span className="text-sm">{item.name}</span>
                   </span>
                 </Link>
               ))}
             </div>
 
-            {/* MOBILE MENU BUTTON */}
+            {/* MOBILE BUTTON */}
             <button
-              className="lg:hidden flex flex-col items-center justify-center w-10 h-10 transition-all duration-300 rounded-lg hover:bg-white/10"
+              className="lg:hidden w-10 h-10 flex flex-col justify-center"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
             >
-              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "rotate-45 translate-y-1" : "mb-1.5"}`} />
-              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "opacity-0" : "mb-1.5"}`} />
-              <span className={`block w-6 h-0.5 bg-white transition-all ${isMenuOpen ? "-rotate-45 -translate-y-1" : ""}`} />
+              <span className="w-6 h-0.5 bg-white mb-1.5" />
+              <span className="w-6 h-0.5 bg-white mb-1.5" />
+              <span className="w-6 h-0.5 bg-white" />
             </button>
           </div>
 
           {/* MOBILE MENU */}
-          <div className={`lg:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? "max-h-[80vh] opacity-100 pb-4" : "max-h-0 opacity-0"}`}>
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl overflow-hidden">
-              <div className="max-h-[70vh] overflow-y-auto">
-
-                {/* Home + About */}
-                {navigation.slice(0, 2).map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
-                      pathname === item.href ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <span>{item.icon}</span>
-                    <span className="font-medium tracking-wide">{item.name}</span>
-                  </Link>
-                ))}
-
-                {/* MOBILE PRODUCT DROPDOWN */}
-                <div className="px-2 lg:hidden">
-                  <button
-                    onClick={() => setIsProductsOpen(!isProductsOpen)}
-                    className="flex items-center justify-between w-full px-4 py-3 mx-2 my-1 rounded-xl text-white hover:bg-white/20"
-                  >
-                    <span className="flex items-center space-x-3">
-                      <span>🔧</span>
-                      <span className="font-medium tracking-wide">Products</span>
-                    </span>
-                    <span className={`transition-transform duration-200 ${isProductsOpen ? "rotate-180" : ""}`}>▼</span>
-                  </button>
-
-                  {isProductsOpen && (
-                    <div className="ml-6 mt-2 space-y-1 animate-fadeIn">
-                      <Link
-                        href="/products/cylinder-liners"
-                        className={`block px-4 py-3 rounded-xl ${
-                          pathname === "/products/cylinder-liners"
-                            ? "bg-white text-blue-900"
-                            : "text-white hover:bg-white/20"
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Cylinder Liners
-                      </Link>
-                    </div>
-                  )}
-                </div>
-
-                {/* Infrastructure */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-4 bg-white/10 backdrop-blur-md rounded-xl p-2">
+              {navigation.map(item => (
                 <Link
-                  href="/infrastructure"
-                  className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
-                    pathname === "/infrastructure" ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
+                  key={item.name}
+                  href={item.href}
+                  className={`block px-4 py-3 rounded-lg transition-colors ${
+                    pathname === item.href ? 'bg-white/20 text-white' : 'text-white hover:bg-white/20'
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <span>🏭</span>
-                  <span className="font-medium tracking-wide">Infrastructure</span>
+                  <span className="mr-2">{item.icon}</span>
+                  <span>{item.name}</span>
                 </Link>
+              ))}
 
-                {/* Remaining menu */}
-                {navigation.slice(2).map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={`flex items-center space-x-3 px-4 py-3 mx-2 my-1 rounded-xl ${
-                      pathname === item.href ? "bg-white text-blue-900 shadow-lg" : "text-white hover:bg-white/20"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
+              {/* MOBILE Products accordion */}
+              <div className="mt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsProductsOpen(prev => !prev)}
+                  className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition-all font-medium ${
+                    isProductPage ? 'bg-white/20 text-white' : 'text-white hover:bg-white/20'
+                  }`}
+                  aria-expanded={isProductsOpen}
+                >
+                  <span className="flex items-center">
+                    <span className="mr-2">🔧</span>
+                    <span>Products</span>
+                  </span>
+                  <svg
+                    className={`w-4 h-4 transform transition-transform ${isProductsOpen ? 'rotate-180' : 'rotate-0'}`}
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
                   >
-                    <span>{item.icon}</span>
-                    <span className="font-medium tracking-wide">{item.name}</span>
-                  </Link>
-                ))}
+                    <path d="M5 8L10 13L15 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+
+                <div
+                  className={`overflow-hidden transition-[max-height] duration-300 mt-2 ${
+                    isProductsOpen ? 'max-h-60' : 'max-h-0'
+                  }`}
+                >
+                  <div className="space-y-1 px-2">
+                    {products.map(p => (
+                      <Link
+                        key={p.href}
+                        href={p.href}
+                        className={`block px-4 py-3 rounded-lg transition-colors ${
+                          pathname === p.href ? 'bg-white/20 text-white' : 'text-white hover:bg-white/20'
+                        }`}
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setIsProductsOpen(false);
+                        }}
+                      >
+                        {p.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </nav>
 
@@ -240,7 +256,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <footer className="bg-gradient-to-br from-gray-900 to-blue-900 text-white">
         <div className="container mx-auto px-4 py-12">
           <div className="grid md:grid-cols-4 gap-8">
-
             {/* LOGO */}
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
@@ -259,7 +274,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-bold mb-4 text-lg">Quick Links</h4>
               <div className="space-y-2">
-                <Link href="/products" className="block text-gray-300 hover:text-white py-1">Products</Link>
+                <Link href="/products/cylinder-liners" className="block text-gray-300 hover:text-white py-1">Products</Link>
                 <Link href="/infrastructure" className="block text-gray-300 hover:text-white py-1">Infrastructure</Link>
                 <Link href="/certifications" className="block text-gray-300 hover:text-white py-1">Certifications</Link>
                 <Link href="/about" className="block text-gray-300 hover:text-white py-1">About Us</Link>

@@ -1,173 +1,230 @@
 [
   {
-    "SE_CODE": "FL-912",
-    "MAKE": "DEUTZ",
     "ENGINE_CODE": "FL 912",
-    "TYPE": "Shoulder Type",
-    "BORE": "100 mm",
-    "H": "136.8 mm",
-    "KS_PART_NO": "89 495 110"
-  },
-  {
-    "SE_CODE": "FL-912",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 912",
-    "TYPE": "Shoulder Type",
-    "BORE": "100 mm",
-    "H": "137.2 mm",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 005 110 912",
+    "BORE": 100,
+    "A": 110,
+    "C": 120,
+    "H": 137.3,
+    "L": 222.3,
     "KS_PART_NO": "89 005 110"
   },
   {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "85.5 mm",
-    "H": "",
-    "KS_PART_NO": "88 451 110"
+    "ENGINE_CODE": "FL 912",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 495 110 912",
+    "BORE": 100,
+    "A": 110,
+    "C": 120,
+    "H": 136.8,
+    "L": 222.3,
+    "KS_PART_NO": "89 495 110"
   },
   {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "83.0 mm",
-    "H": "",
-    "KS_PART_NO": "88 463 110"
-  },
-  {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "77.0 mm",
-    "H": "",
-    "KS_PART_NO": "88 459 110"
-  },
-  {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "87.0 mm",
-    "H": "",
-    "KS_PART_NO": "88 656 110"
-  },
-  {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "77.0 mm",
-    "H": "",
-    "KS_PART_NO": "88 447 110"
-  },
-  {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "19 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "85.5 mm",
-    "H": "",
-    "KS_PART_NO": "88 453 110"
-  },
-  {
-    "SE_CODE": "VW",
-    "MAKE": "VOLKSWAGEN",
-    "ENGINE_CODE": "22 Ribs",
-    "TYPE": "Ribbed",
-    "BORE": "85.5 mm",
-    "H": "",
-    "KS_PART_NO": "88 452 110"
-  },
-  {
-    "SE_CODE": "FL-413",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 413",
-    "TYPE": "Head Seat Type",
-    "BORE": "125 mm",
-    "H": "",
-    "KS_PART_NO": "89 384 110"
-  },
-  {
-    "SE_CODE": "FL-413",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 413",
-    "TYPE": "Head Seat Type",
-    "BORE": "125 mm",
-    "H": "",
-    "KS_PART_NO": "89 030 110"
-  },
-  {
-    "SE_CODE": "FL-413",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 413",
-    "TYPE": "Head Seat Type",
-    "BORE": "120 mm",
-    "H": "",
-    "KS_PART_NO": "88 562 110"
-  },
-  {
-    "SE_CODE": "FL-913",
-    "MAKE": "DEUTZ",
     "ENGINE_CODE": "FL 913",
-    "TYPE": "Shoulder Type",
-    "BORE": "102 mm",
-    "H": "137.2 mm",
-    "KS_PART_NO": "88 684 110"
-  },
-  {
-    "SE_CODE": "FL-913",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 913",
-    "TYPE": "Shoulder Type",
-    "BORE": "102 mm",
-    "H": "136.8 mm",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 494 110 913",
+    "BORE": 102,
+    "A": 110,
+    "C": 120,
+    "H": 136.8,
+    "L": 222.3,
     "KS_PART_NO": "89 494 110"
   },
   {
-    "SE_CODE": "FL-913 C",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 913 C",
-    "TYPE": "Shoulder Type",
-    "BORE": "102 mm",
-    "H": "135.4 mm",
-    "KS_PART_NO": "89 341 110"
+    "ENGINE_CODE": "FL 913",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 88 684 110 913",
+    "BORE": 102,
+    "A": 110,
+    "C": 120,
+    "H": 137.3,
+    "L": 222.3,
+    "KS_PART_NO": "88 684 110"
   },
   {
-    "SE_CODE": "FL-913 C",
-    "MAKE": "DEUTZ",
     "ENGINE_CODE": "FL 913 C",
-    "TYPE": "Shoulder Type",
-    "BORE": "102 mm",
-    "H": "134.9 mm",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 496 110 913 C",
+    "BORE": 102,
+    "A": 109.9,
+    "C": 124.5,
+    "H": 134.9,
+    "L": 220.4,
     "KS_PART_NO": "89 496 110"
   },
   {
-    "SE_CODE": "FL-913 G",
-    "MAKE": "DEUTZ",
-    "ENGINE_CODE": "FL 913 G",
-    "TYPE": "Shoulder Type",
-    "BORE": "102 mm",
-    "H": "124.8 mm",
-    "KS_PART_NO": "89 410 110"
+    "ENGINE_CODE": "FL 913 C",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 341 110 913 C",
+    "BORE": 102,
+    "A": 109.9,
+    "C": 124.5,
+    "H": 135.4,
+    "L": 220.4,
+    "KS_PART_NO": "89 341 110"
   },
   {
-    "SE_CODE": "TATRA",
-    "MAKE": "TATRA",
-    "ENGINE_CODE": "TATRA",
-    "TYPE": "Head Seat Type",
-    "BORE": "120 mm",
-    "H": "",
-    "KS_PART_NO": "89 350 110"
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 88 562 110 413",
+    "BORE": 120,
+    "A": 134,
+    "C": 145,
+    "H": 169.9,
+    "L": 255,
+    "KS_PART_NO": "88 562 110"
   },
   {
-    "SE_CODE": "TATRA",
-    "MAKE": "TATRA",
-    "ENGINE_CODE": "TATRA",
-    "TYPE": "Head Seat Type",
-    "BORE": "120 mm",
-    "H": "",
-    "KS_PART_NO": "89 539 110"
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 030 110 413",
+    "BORE": 125,
+    "A": 139,
+    "C": 150,
+    "H": 169.5,
+    "L": 250,
+    "KS_PART_NO": "89 030 110"
+  },
+  {
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Air Cooled Finned Cylinder Liner",
+    "MAKE": "SAME-DEUTZ",
+    "SE_CODE": "SE 89 384 110 413",
+    "BORE": 125,
+    "A": 139,
+    "C": 154,
+    "H": 169.5,
+    "L": 250.5,
+    "KS_PART_NO": "89 384 110"
+  },
+
+
+  {
+    "ENGINE_CODE": "AKD 112 Series",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "MWM",
+    "SE_CODE": "SE 88 308 110 MWM",
+    "BORE": 98,
+    "A": 109.9,
+    "C": 104.74,
+    "H": "154.5 + 6",
+    "L": 254.7,
+    "KS_PART_NO": "88 308 110"
+  },
+  {
+    "ENGINE_CODE": "D -227",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "MWM",
+    "SE_CODE": "SE 88 839 110 MWM",
+    "BORE": 100,
+    "A": 110.95,
+    "C": 106,
+    "H": 131,
+    "L": 212,
+    "KS_PART_NO": "88 839 110"
+  },
+
+ 
+  {
+    "ENGINE_CODE": "FL 912",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "IHC CASE",
+    "SE_CODE": "SE 89 005 110 912",
+    "BORE": 100,
+    "A": 110,
+    "C": 120,
+    "H": 137.3,
+    "L": 222.3,
+    "KS_PART_NO": "89 005 110"
+  },
+  {
+    "ENGINE_CODE": "FL 912",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "IHC CASE",
+    "SE_CODE": "SE 89 495 110 912",
+    "BORE": 100,
+    "A": 110,
+    "C": 120,
+    "H": 136.8,
+    "L": 222.3,
+    "KS_PART_NO": "89 495 110"
+  },
+
+  
+  {
+    "ENGINE_CODE": "FL 913",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "FENDT",
+    "SE_CODE": "SE 89 494 110 913",
+    "BORE": 102,
+    "A": 110,
+    "C": 120,
+    "H": 136.8,
+    "L": 222.3,
+    "KS_PART_NO": "89 494 110"
+  },
+  {
+    "ENGINE_CODE": "FL 913 C",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "FENDT",
+    "SE_CODE": "SE 89 496 110 913 C",
+    "BORE": 102,
+    "A": 109.9,
+    "C": 124.5,
+    "H": 134.9,
+    "L": 220.4,
+    "KS_PART_NO": "89 496 110"
+  },
+
+  
+  {
+    "ENGINE_CODE": "FL 413",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "TAM",
+    "SE_CODE": "SE 88 562 110 413",
+    "BORE": 120,
+    "A": 134,
+    "C": 145,
+    "H": 169.9,
+    "L": 255,
+    "KS_PART_NO": "88 562 110"
+  },
+
+ 
+  {
+    "ENGINE_CODE": "FL 913",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "LIEBHERR",
+    "SE_CODE": "SE 89 494 110 913",
+    "BORE": 102,
+    "A": 110,
+    "C": 120,
+    "H": 136.8,
+    "L": 222.3,
+    "KS_PART_NO": "89 494 110"
+  },
+
+  
+  {
+    "ENGINE_CODE": "AKD 112 Series",
+    "TYPE": "Air Cooled Fin Block",
+    "MAKE": "RENAULT",
+    "SE_CODE": "SE 88 308 110 MWM",
+    "BORE": 98,
+    "A": 109.9,
+    "C": 104.74,
+    "H": "154.5 + 6",
+    "L": 254.7,
+    "KS_PART_NO": "88 308 110"
   }
 ]
