@@ -13,68 +13,38 @@ export default function Certifications() {
       unitNo: '1905644',
       scope: 'Manufacturing of Auto Parts, Engine Components, and Precision Automotive Components',
       validity: '2020-01-01 to 2025-12-31',
-      issuedBy: 'TUV INDIA',
+      issuedBy: 'TÜV Rheinland Group',
       status: 'Active',
       issuedDate: '2019-12-31',
-      image: null
+      image: '/certificate-iso.jpg'
     },
     {
       id: 2,
-      name: 'ISO 14001:2018',
-      type: 'Environmental Management System',
-      certificateNo: 'EM-2022-7845',
-      unitNo: '2214563',
-      scope: 'Environmentally friendly manufacturing processes and continual improvement',
-      validity: '2022-08-01 to 2025-07-31',
-      issuedBy: 'IRQ',
+      name: 'IATF 16949:2016',
+      type: 'Automotive Quality Management',
+      certificateNo: 'AQF-2023-4587',
+      unitNo: '2309871',
+      scope: 'Design and Manufacturing of Automotive Parts and Components',
+      validity: '2023-03-15 to 2026-03-14',
+      issuedBy: 'TÜV Rheinland Group',
       status: 'Active',
-      issuedDate: '2018-08-01',
-      image: null
+      issuedDate: '2023-03-15',
+      image: '/certificate-iatf.jpg'
     },
     {
       id: 3,
-      name: 'ISO 45001:2018',
-      type: 'Occupational Health & Safety Management',
-      certificateNo: 'OH-2019-3344',
-      unitNo: '2330019',
-      scope: 'Health and safety systems for manufacturing operations',
-      validity: '2023-03-15 to 2026-03-14',
-      issuedBy: 'IRQ',
+      name: 'ISO 14001:2015',
+      type: 'Environmental Management System',
+      certificateNo: 'EM-2022-7845',
+      unitNo: '2214563',
+      scope: 'Environmental Friendly Manufacturing Processes',
+      validity: '2022-08-01 to 2025-07-31',
+      issuedBy: 'TÜV Rheinland Group',
       status: 'Active',
-      issuedDate: '2019-03-15',
-      image: null
+      issuedDate: '2022-08-01',
+      image: '/certificate-14001.jpg'
     }
   ];
-
-  // Small helper to render certificate image or a polished placeholder when image is missing
-  function renderCertificateMedia(cert) {
-    if (cert.image) {
-      return (
-        <img
-          src={cert.image}
-          alt={`${cert.name} certificate`}
-          className="w-full h-48 object-contain rounded-lg"
-          onError={(e) => {
-            // if image fails to load, hide it and let placeholder show instead
-            e.currentTarget.style.display = 'none';
-            const placeholder = e.currentTarget.nextSibling;
-            if (placeholder) placeholder.style.display = 'flex';
-          }}
-        />
-      );
-    }
-
-    // Placeholder: keeps the exact same layout but displays a clear, attractive placeholder that contains issuer + year
-    return (
-      <div className="w-full h-48 rounded-lg flex flex-col items-center justify-center bg-white/10 border border-white/10">
-        <div className="text-center">
-          <div className="mb-2 text-sm text-white/90">No certificate image available</div>
-          <div className="px-3 py-1 rounded-full bg-white/10 text-xs text-white/90">{cert.issuedBy}</div>
-          <div className="mt-2 text-xs text-white/80">Issued: {cert.issuedDate}</div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -107,13 +77,13 @@ export default function Certifications() {
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed px-4">
               Our commitment to excellence is validated by international certifications that demonstrate 
-              our adherence to the highest quality, environmental, and occupational health & safety standards.
+              our adherence to the highest quality, environmental, and automotive industry standards.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Rest of the content remains exactly the same visually */}
+      {/* Rest of the content remains exactly the same */}
       <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
@@ -174,11 +144,13 @@ export default function Certifications() {
               <div className="md:flex">
                 {/* Certificate Image/Placeholder */}
                 <div className="md:w-2/5 bg-gradient-to-br from-blue-600 to-blue-800 p-8 flex items-center justify-center">
-                  <div className="text-center text-white w-full">
-                    {/* polished media area: either image or placeholder */}
-                    {renderCertificateMedia(certifications[activeCert])}
-
-                    <h3 className="text-2xl font-bold mt-4 mb-2">{certifications[activeCert].name}</h3>
+                  <div className="text-center text-white">
+                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 01118 0z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">{certifications[activeCert].name}</h3>
                     <p className="text-blue-100">{certifications[activeCert].type}</p>
                   </div>
                 </div>
@@ -258,7 +230,7 @@ export default function Certifications() {
                   {/* Certificate Notice */}
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <p className="text-sm text-blue-700 text-center">
-                      Certified by TUV INDIA & IRQ • Valid across all manufacturing facilities
+                      Certified by TÜV Rheinland Group • Valid across all manufacturing facilities
                     </p>
                   </div>
                 </div>

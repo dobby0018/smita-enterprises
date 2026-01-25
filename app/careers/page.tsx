@@ -2,8 +2,16 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
+type JobOpening = {
+  title: string;
+  department?: string;
+  experience?: string;
+  location?: string;
+  type?: string;
+};
+
 export default function Careers() {
-  const [openings, setOpenings] = useState(null); // null = not checked yet
+  const [openings, setOpenings] = useState<JobOpening[] | null>(null); // ✅ fixed typing
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -11,38 +19,33 @@ export default function Careers() {
 
     async function checkOpenings() {
       try {
-        // try to fetch a JSON placed in the public folder at /openings.json
         const res = await fetch('/openings.json', { cache: 'no-store' });
         if (!mounted) return;
 
         if (!res.ok) {
-          // file not found or other HTTP error -> treat as no openings
-          setOpenings([]);
+          setOpenings([]); // ✅ now valid
           setLoading(false);
           return;
         }
 
         const data = await res.json();
-        // Accept either an array (['openings...']) or an object { openings: [...] }
-        const list = Array.isArray(data) ? data : (data.openings || []);
+        const list: JobOpening[] = Array.isArray(data) ? data : (data.openings || []);
         setOpenings(list);
       } catch (err) {
-        // network error or invalid JSON -> treat as no openings
-        setOpenings([]);
+        setOpenings([]); // ✅ now valid
       } finally {
         if (mounted) setLoading(false);
       }
     }
 
     checkOpenings();
-
     return () => { mounted = false; };
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gray-900 text-white py-16 lg:py-20 overflow-hidden">
+     <section className="relative bg-gray-900 text-white py-16 lg:py-20 overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('/careers-hero-bg.png')" }}
@@ -77,7 +80,6 @@ export default function Careers() {
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
 
-            {/* Simple Intro */}
             <div className="text-center mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Why Join Us?</h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
@@ -85,7 +87,6 @@ export default function Careers() {
               </p>
             </div>
 
-            {/* Job Openings (loaded from /public/openings.json) */}
             <div className="mb-12">
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-8">
                 Current Openings
@@ -111,16 +112,19 @@ export default function Careers() {
                 {!loading && openings && openings.length === 0 && (
                   <div className="bg-white rounded-xl shadow-md p-6 border border-gray-200 text-center">
                     <p className="text-gray-700 font-medium">No current openings at the moment.</p>
-                    <p className="text-sm text-gray-500 mt-2">If you’d like to work with us, please contact us and we’ll keep your details on file.</p>
+                    <p className="text-sm text-gray-500 mt-2">
+                      If you’d like to work with us, please contact us and we’ll keep your details on file.
+                    </p>
                   </div>
                 )}
               </div>
             </div>
 
-            {/* Contact CTA */}
             <div className="bg-blue-600 rounded-2xl p-8 text-white text-center">
               <h2 className="text-2xl sm:text-3xl font-bold mb-4">Want to apply or ask a question?</h2>
-              <p className="text-blue-100 mb-6">If you want to contact us about jobs or submit your details, please go to our contact page.</p>
+              <p className="text-blue-100 mb-6">
+                If you want to contact us about jobs or submit your details, please go to our contact page.
+              </p>
               <Link href="/contact" className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                 Contact Us
               </Link>
@@ -132,3 +136,6 @@ export default function Careers() {
     </div>
   );
 }
+
+
+
