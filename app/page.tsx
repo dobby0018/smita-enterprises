@@ -9,7 +9,7 @@ export default function Home() {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0">
           <Image
-            src="/casting-background.png" // Your casting image path
+            src="/casting-background6.png" // Your casting image path
             alt="Precision Casting Process"
             fill
             className="object-cover"

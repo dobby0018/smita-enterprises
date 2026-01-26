@@ -215,14 +215,14 @@ export default function Infrastructure() {
                       <span className="text-gray-700">Team Strength</span>
                       <span className="font-bold text-blue-600">250+ Professionals</span>
                     </div>
-                    <div className="flex justify-between items-center py-3 border-b border-gray-200">
+                    {/* <div className="flex justify-between items-center py-3 border-b border-gray-200">
                       <span className="text-gray-700">Quality Rate</span>
                       <span className="font-bold text-green-600">99.2%</span>
                     </div>
                     <div className="flex justify-between items-center py-3">
                       <span className="text-gray-700">On-time Delivery</span>
                       <span className="font-bold text-green-600">98.5%</span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 

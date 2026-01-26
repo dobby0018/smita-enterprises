@@ -62,8 +62,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <div className="relative w-14 h-14">
                 <Image src="/logo.png" alt="Smitha Enterprises" fill className="object-contain" priority />
               </div>
-              <div className="hidden sm:flex flex-col">
-                <span className={`text-xl font-bold text-white ${SmithaFont.className}`}>
+              {/* Show on mobile too — smaller font on small screens, larger on sm+ */}
+              <div className="flex flex-col">
+                <span className={`text-sm sm:text-xl font-bold text-white ${SmithaFont.className}`}>
                   Smitha Enterprises
                 </span>
               </div>
@@ -285,8 +286,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-bold mb-4 text-lg">Contact</h4>
               <div className="space-y-2 text-gray-300">
-                <p className="flex items-center space-x-2"><span>📧</span><span>msarun71@yahoo.com</span></p>
-                <p className="flex items-center space-x-2"><span>📞</span><span>+91 9845265394</span></p>
+                <p className="flex items-center space-x-2"><span>📧</span><span>aravind@smithanenterprises.com</span></p>
+                <p className="flex items-center space-x-2"><span>📞</span><span>+91 8865912912 /+91 9845265394</span></p>
                 <p className="flex items-center space-x-2"><span>📍</span><span className="text-sm">Harihar, Karnataka</span></p>
               </div>
             </div>

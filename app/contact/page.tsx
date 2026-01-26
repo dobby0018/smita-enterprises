@@ -4,7 +4,7 @@ export default function Contact() {
   // Company information
   const companyInfo = {
     address: "Smitha Enterprises Unit 2, Post, Industrial Area, Harihar, Karnataka, India",
-    phone: "08192-242341",
+    phone: "+91 8865912912 / +91 9845265394",
     email: "aravind@smithaenterprises.com",
     hours: "Monday - Saturday: 9:00 AM - 6:00 PM",
     emergencySupport: "9845265394"

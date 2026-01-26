@@ -13,33 +13,33 @@ export default function Certifications() {
       unitNo: '1905644',
       scope: 'Manufacturing of Auto Parts, Engine Components, and Precision Automotive Components',
       validity: '2020-01-01 to 2025-12-31',
-      issuedBy: 'TÜV Rheinland Group',
+      issuedBy: 'TUV INDIA',
       status: 'Active',
       issuedDate: '2019-12-31',
       image: '/certificate-iso.jpg'
     },
     {
       id: 2,
-      name: 'IATF 16949:2016',
-      type: 'Automotive Quality Management',
-      certificateNo: 'AQF-2023-4587',
+      name: 'ISO 45001:2018',
+      type: 'Occupational Health & Safety Management',
+      certificateNo: 'OH-2018-4587',
       unitNo: '2309871',
-      scope: 'Design and Manufacturing of Automotive Parts and Components',
+      scope: 'Occupational health and safety management across manufacturing operations',
       validity: '2023-03-15 to 2026-03-14',
-      issuedBy: 'TÜV Rheinland Group',
+      issuedBy: 'IRQ',
       status: 'Active',
       issuedDate: '2023-03-15',
-      image: '/certificate-iatf.jpg'
+      image: '/certificate-45001.jpg'
     },
     {
       id: 3,
-      name: 'ISO 14001:2015',
+      name: 'ISO 14001:2018',
       type: 'Environmental Management System',
       certificateNo: 'EM-2022-7845',
       unitNo: '2214563',
-      scope: 'Environmental Friendly Manufacturing Processes',
+      scope: 'Environmental friendly manufacturing processes',
       validity: '2022-08-01 to 2025-07-31',
-      issuedBy: 'TÜV Rheinland Group',
+      issuedBy: 'IRQ',
       status: 'Active',
       issuedDate: '2022-08-01',
       image: '/certificate-14001.jpg'
@@ -230,7 +230,7 @@ export default function Certifications() {
                   {/* Certificate Notice */}
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <p className="text-sm text-blue-700 text-center">
-                      Certified by TÜV Rheinland Group • Valid across all manufacturing facilities
+                      Certified by {certifications[activeCert].issuedBy} • Valid across all manufacturing facilities
                     </p>
                   </div>
                 </div>
