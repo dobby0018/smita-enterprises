@@ -39,10 +39,11 @@ import Layout from '../components/Layout';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Smitha Enterprises - Premium Auto Parts Manufacturer',
-  description: 'Smitha Enterprises is a leading manufacturer of high-quality auto parts with international certifications and global reach.',
-  keywords: 'auto parts, manufacturing, automotive, engine components, brake systems',
+export const metadata = {
+  title: "Smitha Enterprises | Auto Parts Manufacturer",
+  description:
+    "Smitha Enterprises is a leading manufacturer of shell moulded castings and air-cooled cylinder liners in Harihar, Karnataka, India.",
+  keywords: "Smitha Enterprises, smita enterprises, smitaenterprises, auto parts manufacturer, cylinder liners, shell moulded castings, Harihar Karnataka",
   
 };
 
