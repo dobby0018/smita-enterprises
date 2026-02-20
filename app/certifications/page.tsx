@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function Certifications() {
   const [activeCert, setActiveCert] = useState(0);
@@ -9,13 +10,13 @@ export default function Certifications() {
       id: 1,
       name: 'ISO 9001:2015',
       type: 'Quality Management System',
-      certificateNo: '189402-2016',
-      unitNo: '1905644',
-      scope: 'Manufacturing of Auto Parts, Engine Components, and Precision Automotive Components',
-      validity: '2020-01-01 to 2025-12-31',
-      issuedBy: 'TUV INDIA',
+      certificateNo: 'IND 100 26396975',
+      unitNo: 'BAN/AUD/25-26/8305',
+      scope: 'Manufacture and Supply of Cylinder Liners, Cast Iron Castings, SG Iron Castings, High Alloyed Castings and Machined Metal Components.',
+      validity: '03.02.2026 to 02.02.2029',
+      issuedBy: 'TUV INDIA PVT. LTD.',
       status: 'Active',
-      issuedDate: '2019-12-31',
+      issuedDate: '03.02.2026',
       image: '/certificate-iso.jpg'
     },
     {
@@ -29,7 +30,7 @@ export default function Certifications() {
       issuedBy: 'IRQ',
       status: 'Active',
       issuedDate: '2023-03-15',
-      image: '/certificate-45001.jpg'
+      image: null
     },
     {
       id: 3,
@@ -42,22 +43,19 @@ export default function Certifications() {
       issuedBy: 'IRQ',
       status: 'Active',
       issuedDate: '2022-08-01',
-      image: '/certificate-14001.jpg'
+      image: null
     }
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section with Background Image - EXACTLY matching Infrastructure Page */}
+
+      {/* Hero Section (UNCHANGED) */}
       <section className="relative bg-gray-900 text-white py-16 lg:py-20 overflow-hidden">
-        {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/certifications-hero-bg.png')",
-          }}
+          style={{ backgroundImage: "url('/certifications-hero-bg.png')" }}
         >
-          {/* Overlay for better text readability */}
           <div className="absolute inset-0 bg-blue-900/70 mix-blend-multiply"></div>
         </div>
         
@@ -76,18 +74,18 @@ export default function Certifications() {
               </span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed px-4">
-              Our commitment to excellence is validated by international certifications that demonstrate 
-              our adherence to the highest quality, environmental, and automotive industry standards.
+              Our commitment to excellence is validated by international certifications.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Rest of the content remains exactly the same */}
+      {/* Content */}
       <div className="bg-gradient-to-br from-gray-50 to-blue-50 py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Certificates Grid */}
+
+            {/* Certificates Grid (UNCHANGED) */}
             <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mb-12">
               {certifications.map((cert, index) => (
                 <div
@@ -100,23 +98,20 @@ export default function Certifications() {
                   onClick={() => setActiveCert(index)}
                 >
                   <div className="p-6">
-                    {/* Status Badge */}
                     <div className="flex justify-between items-start mb-4">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                         ● {cert.status}
                       </span>
-                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white font-bold text-xs text-center leading-tight">
+                      <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center text-white font-bold text-xs">
                         ISO
                       </div>
                     </div>
 
-                    {/* Certificate Title */}
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                       {cert.name}
                     </h3>
                     <p className="text-gray-600 text-sm mb-4">{cert.type}</p>
 
-                    {/* Certificate Details */}
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-500">Certificate No:</span>
@@ -129,7 +124,6 @@ export default function Certifications() {
                     </div>
                   </div>
 
-                  {/* Selected Indicator */}
                   {activeCert === index && (
                     <div className="bg-blue-500 text-white text-center py-2 rounded-b-xl">
                       <span className="text-sm font-medium">Currently Viewing</span>
@@ -142,20 +136,40 @@ export default function Certifications() {
             {/* Detailed Certificate View */}
             <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
               <div className="md:flex">
-                {/* Certificate Image/Placeholder */}
-                <div className="md:w-2/5 bg-gradient-to-br from-blue-600 to-blue-800 p-8 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 01118 0z" />
-                      </svg>
+
+                {/* ✅ IMPROVED IMAGE SECTION */}
+                <div className="md:w-2/5 bg-gradient-to-br from-blue-600 to-blue-800 p-6 flex items-center justify-center">
+
+                  {certifications[activeCert].image ? (
+                    <div className="relative w-full h-[420px] bg-white rounded-xl shadow-xl p-4">
+                      <Image
+                        key={certifications[activeCert].id}
+                        src={certifications[activeCert].image}
+                        alt={certifications[activeCert].name}
+                        fill
+                        className="object-contain rounded-lg"
+                        sizes="(max-width: 768px) 100vw, 40vw"
+                        priority={activeCert === 0}
+                      />
                     </div>
-                    <h3 className="text-2xl font-bold mb-2">{certifications[activeCert].name}</h3>
-                    <p className="text-blue-100">{certifications[activeCert].type}</p>
-                  </div>
+                  ) : (
+                    <div className="text-center text-white">
+                      <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 01118 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold">
+                        {certifications[activeCert].name}
+                      </h3>
+                      <p className="text-blue-100 mt-2">
+                        Certificate image not available
+                      </p>
+                    </div>
+                  )}
                 </div>
 
-                {/* Certificate Details */}
+                {/* Details Section (UNCHANGED) */}
                 <div className="md:w-3/5 p-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-4">
@@ -167,7 +181,7 @@ export default function Certifications() {
                           {certifications[activeCert].certificateNo}
                         </p>
                       </div>
-                      
+
                       <div>
                         <label className="text-sm font-medium text-gray-500 block mb-1">
                           Unit Certificate No.
@@ -176,7 +190,7 @@ export default function Certifications() {
                           {certifications[activeCert].unitNo}
                         </p>
                       </div>
-                      
+
                       <div>
                         <label className="text-sm font-medium text-gray-500 block mb-1">
                           Issued By
@@ -196,7 +210,7 @@ export default function Certifications() {
                           {certifications[activeCert].validity}
                         </p>
                       </div>
-                      
+
                       <div>
                         <label className="text-sm font-medium text-gray-500 block mb-1">
                           Issue Date
@@ -205,7 +219,7 @@ export default function Certifications() {
                           {certifications[activeCert].issuedDate}
                         </p>
                       </div>
-                      
+
                       <div>
                         <label className="text-sm font-medium text-gray-500 block mb-1">
                           Status
@@ -217,7 +231,6 @@ export default function Certifications() {
                     </div>
                   </div>
 
-                  {/* Scope Section */}
                   <div className="mt-8 pt-6 border-t border-gray-200">
                     <label className="text-sm font-medium text-gray-500 block mb-2">
                       Scope of Certification
@@ -227,48 +240,16 @@ export default function Certifications() {
                     </p>
                   </div>
 
-                  {/* Certificate Notice */}
                   <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
                     <p className="text-sm text-blue-700 text-center">
                       Certified by {certifications[activeCert].issuedBy} • Valid across all manufacturing facilities
                     </p>
                   </div>
                 </div>
+
               </div>
             </div>
 
-            {/* Additional Info Section */}
-            <div className="mt-12 grid md:grid-cols-3 gap-6 text-center">
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 01118 0z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Quality Assured</h3>
-                <p className="text-sm text-gray-600">International standards compliance</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Global Recognition</h3>
-                <p className="text-sm text-gray-600">Accepted by international clients</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Continuous Improvement</h3>
-                <p className="text-sm text-gray-600">Regular audits and updates</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
