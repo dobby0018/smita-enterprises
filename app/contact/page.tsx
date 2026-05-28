@@ -5,7 +5,8 @@ export default function Contact() {
   const companyInfo = {
     address: "Smitha Enterprises Unit 2, Post, Industrial Area, Harihar, Karnataka, India",
     phone: "+91 8865912912 / +91 9845265394",
-    email: "aravind@smithaenterprises.com",
+    email: "Aravind@smithaenterprises.com",
+    email_2:"Arun@smithaenterprises.com",
     hours: "Monday - Saturday: 9:00 AM - 6:00 PM",
     emergencySupport: "9845265394"
   };
@@ -96,6 +97,7 @@ export default function Contact() {
                       <div>
                         <h3 className="font-semibold text-gray-900 mb-1">Email Us</h3>
                         <p className="text-gray-600">{companyInfo.email}</p>
+                        <p className="text-gray-600">{companyInfo.email_2}</p>
                       </div>
                     </div>
 

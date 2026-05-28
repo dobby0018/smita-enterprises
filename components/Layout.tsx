@@ -286,7 +286,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-bold mb-4 text-lg">Contact</h4>
               <div className="space-y-2 text-gray-300">
-                <p className="flex items-center space-x-2"><span>📧</span><span>aravind@smithanenterprises.com</span></p>
+                <p className="flex items-center space-x-2"><span>📧</span><span>Aravind@smithanenterprises.com</span>
+                </p>
+                <p className="flex items-center space-x-2"><span>📧</span><span>Arun@smithanenterprises.com</span>
+                </p>
                 <p className="flex items-center space-x-2"><span>📞</span><span>+91 8865912912 /+91 9845265394</span></p>
                 <p className="flex items-center space-x-2"><span>📍</span><span className="text-sm">Harihar, Karnataka</span></p>
               </div>
@@ -294,7 +297,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
 
           <div className="border-t border-white/20 mt-8 pt-8 text-center text-gray-400 text-sm">
-            © 2024 Smitha Enterprises. All rights reserved.
+            © 2026 Smitha Enterprises. All rights reserved.
           </div>
         </div>
       </footer>
