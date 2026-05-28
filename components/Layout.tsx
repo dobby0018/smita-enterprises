@@ -286,9 +286,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-bold mb-4 text-lg">Contact</h4>
               <div className="space-y-2 text-gray-300">
-                <p className="flex items-center space-x-2"><span>📧</span><span>Aravind@smithanenterprises.com</span>
+                <p className="flex items-center space-x-2"><span>📧</span><span>Aravind@smithaenterprises.com</span>
                 </p>
-                <p className="flex items-center space-x-2"><span>📧</span><span>Arun@smithanenterprises.com</span>
+                <p className="flex items-center space-x-2"><span>📧</span><span>Arun@smithaenterprises.com</span>
                 </p>
                 <p className="flex items-center space-x-2"><span>📞</span><span>+91 8865912912 /+91 9845265394</span></p>
                 <p className="flex items-center space-x-2"><span>📍</span><span className="text-sm">Harihar, Karnataka</span></p>
