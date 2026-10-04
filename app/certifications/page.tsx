@@ -19,32 +19,32 @@ export default function Certifications() {
       issuedDate: '03.02.2026',
       image: '/certificate-iso.jpg'
     },
-    {
-      id: 2,
-      name: 'ISO 45001:2018',
-      type: 'Occupational Health & Safety Management',
-      certificateNo: 'OH-2018-4587',
-      unitNo: '2309871',
-      scope: 'Occupational health and safety management across manufacturing operations',
-      validity: '2023-03-15 to 2026-03-14',
-      issuedBy: 'IRQ',
-      status: 'Active',
-      issuedDate: '2023-03-15',
-      image: null
-    },
-    {
-      id: 3,
-      name: 'ISO 14001:2018',
-      type: 'Environmental Management System',
-      certificateNo: 'EM-2022-7845',
-      unitNo: '2214563',
-      scope: 'Environmental friendly manufacturing processes',
-      validity: '2022-08-01 to 2025-07-31',
-      issuedBy: 'IRQ',
-      status: 'Active',
-      issuedDate: '2022-08-01',
-      image: null
-    }
+  {
+  id: 2,
+  name: 'ISO 45001:2018',
+  type: 'Occupational Health & Safety Management System',
+  certificateNo: '23UOBL2306',
+  unitNo: null,
+  scope: 'Manufacture and supply of cylinder liners, cast iron castings, SG iron castings, high alloyed castings and machined metal components',
+  validity: '2026-09-17 to 2029-09-16',
+  issuedBy: 'QAMS Certification',
+  status: 'Active',
+  issuedDate: '2026-09-17',
+  image: '/45001.png'
+},
+{
+  id: 3,
+  name: 'ISO 14001:2015',
+  type: 'Environmental Management System',
+  certificateNo: '23UEBL2206',
+  unitNo: null,
+  scope: 'Manufacture and supply of cylinder liners, cast iron castings, SG iron castings, high alloyed castings and machined metal components',
+  validity: '2026-09-17 to 2029-09-16',
+  issuedBy: 'QAMS Certification',
+  status: 'Active',
+  issuedDate: '2026-09-17',
+  image: '/14001.png'
+}
   ];
 
   return (
